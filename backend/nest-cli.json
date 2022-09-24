@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/backend/src",
+  "monorepo": true,
+  "root": "apps/backend",
+  "compilerOptions": {
+    "webpack": true,
+    "tsConfigPath": "apps/backend/tsconfig.app.json"
+  },
+  "projects": {
+    "backend": {
+      "type": "application",
+      "root": "apps/backend",
+      "entryFile": "main",
+      "sourceRoot": "apps/backend/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/backend/tsconfig.app.json"
+      }
+    },
+    "discord": {
+      "type": "application",
+      "root": "apps/discord",
+      "entryFile": "main",
+      "sourceRoot": "apps/discord/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/discord/tsconfig.app.json"
+      }
+    },
+    "event-scheduler": {
+      "type": "application",
+      "root": "apps/event-scheduler",
+      "entryFile": "main",
+      "sourceRoot": "apps/event-scheduler/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/event-scheduler/tsconfig.app.json"
+      }
+    }
+  }
+}
