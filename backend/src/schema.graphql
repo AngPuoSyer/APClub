@@ -158,5 +158,9 @@ input UserWhereInput {
 }
 
 input UserWhereUniqueInput {
+  contactNumber: String
+  email: String
   id: String
+  tpNumber: String
+  username: String
 }
