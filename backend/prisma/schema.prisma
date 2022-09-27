@@ -1,0 +1,92 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
+  binaryTargets   = ["native", "debian-openssl-1.1.x"]
+}
+
+generator dbml {
+  provider = "prisma-dbml-generator"
+}
+
+generator erd {
+  provider                  = "prisma-erd-generator"
+  output                    = "../ERD.pdf"
+  includeRelationFromFields = true
+}
+
+generator nestgraphql {
+  provider     = "node node_modules/prisma-nestjs-graphql"
+  emitCompiled = true
+  purgeOutput  = true
+  output       = "./@generated"
+}
+
+model User {
+  id            String            @id @default(uuid())
+  username      String
+  email         String
+  password      String
+  tpNumber      String
+  contactNumber String?
+  status        StudentStatusEnum @default(ACTIVE)
+  // clubAdmin     ClubAdmin[]
+}
+
+// model ClubAdmin {
+//   id    String @id
+//   label String
+
+//   userId String
+//   user   User   @relation(fields: [userId], references: [id])
+//   clubId String
+//   club   Club   @relation(fields: [clubId], references: [id])
+
+//   role ClubAdminRoleEnum
+// }
+
+// model SuperAdmin {
+//   id       String @id @default(uuid())
+//   email    String
+//   username String
+//   password String
+// }
+
+// model Club {
+//   id          String         @id @default(uuid())
+//   name        String
+//   description String
+//   status      ClubStatusEnum
+
+//   clubAdmin ClubAdmin[]
+// }
+
+enum StudentStatusEnum {
+  ACTIVE
+  INACTIVE
+  GRADUATED
+}
+
+// enum ClubAdminRoleEnum {
+//   PRESIDENT
+//   VICE_PRESIDENT
+//   SECRETARY
+//   ASSISTANT_SECRETARY
+//   TREASURER
+//   ASSISTANT_TREASURER
+//   COMMITEE
+// }
+
+// enum ClubStatusEnum {
+//   ACTIVE
+//   INACTIVE
+//   INVALIDATED
+//   DEPRECATED
+// }
