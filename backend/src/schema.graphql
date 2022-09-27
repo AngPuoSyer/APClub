@@ -1,0 +1,162 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input EnumStudentStatusEnumFilter {
+  equals: StudentStatusEnum
+  in: [StudentStatusEnum!]
+  not: NestedEnumStudentStatusEnumFilter
+  notIn: [StudentStatusEnum!]
+}
+
+input NestedEnumStudentStatusEnumFilter {
+  equals: StudentStatusEnum
+  in: [StudentStatusEnum!]
+  not: NestedEnumStudentStatusEnumFilter
+  notIn: [StudentStatusEnum!]
+}
+
+input NestedStringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringFilter
+  notIn: [String!]
+  search: String
+  startsWith: String
+}
+
+input NestedStringNullableFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringNullableFilter
+  notIn: [String!]
+  search: String
+  startsWith: String
+}
+
+type Query {
+  userFindOne(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: UserWhereInput): User!
+}
+
+enum QueryMode {
+  default
+  insensitive
+}
+
+enum SortOrder {
+  asc
+  desc
+}
+
+input StringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  mode: QueryMode
+  not: NestedStringFilter
+  notIn: [String!]
+  search: String
+  startsWith: String
+}
+
+input StringNullableFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  mode: QueryMode
+  not: NestedStringNullableFilter
+  notIn: [String!]
+  search: String
+  startsWith: String
+}
+
+enum StudentStatusEnum {
+  ACTIVE
+  GRADUATED
+  INACTIVE
+}
+
+type User {
+  contactNumber: String
+  email: String!
+  id: ID!
+  password: String!
+  status: StudentStatusEnum!
+  tpNumber: String!
+  username: String!
+}
+
+enum UserOrderByRelevanceFieldEnum {
+  contactNumber
+  email
+  id
+  password
+  tpNumber
+  username
+}
+
+input UserOrderByRelevanceInput {
+  fields: [UserOrderByRelevanceFieldEnum!]!
+  search: String!
+  sort: SortOrder!
+}
+
+input UserOrderByWithRelationAndSearchRelevanceInput {
+  _relevance: UserOrderByRelevanceInput
+  contactNumber: SortOrder
+  email: SortOrder
+  id: SortOrder
+  password: SortOrder
+  status: SortOrder
+  tpNumber: SortOrder
+  username: SortOrder
+}
+
+enum UserScalarFieldEnum {
+  contactNumber
+  email
+  id
+  password
+  status
+  tpNumber
+  username
+}
+
+input UserWhereInput {
+  AND: [UserWhereInput!]
+  NOT: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  contactNumber: StringNullableFilter
+  email: StringFilter
+  id: StringFilter
+  password: StringFilter
+  status: EnumStudentStatusEnumFilter
+  tpNumber: StringFilter
+  username: StringFilter
+}
+
+input UserWhereUniqueInput {
+  id: String
+}

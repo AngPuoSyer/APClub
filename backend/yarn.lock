@@ -1023,6 +1023,20 @@
     consola "^2.15.0"
     node-fetch "^2.6.1"
 
+"@paljs/plugins@^4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@paljs/plugins/-/plugins-4.1.0.tgz#89888b0705e1b19a8f8e79d8dca24564d7c3a171"
+  integrity sha512-6N1Gb/wJ27EyyI1VxyXyyr3bB8lVSjFpKj7Lfqjb65dwqZ2ImTRKdbxRnnp9nFEyVAkFZK4uqRVyha8JDhKkFQ==
+  dependencies:
+    "@paljs/types" "^4.0.18"
+    graphql-fields "2.0.3"
+    graphql-tag "2.12.6"
+
+"@paljs/types@^4.0.18":
+  version "4.0.18"
+  resolved "https://registry.yarnpkg.com/@paljs/types/-/types-4.0.18.tgz#baa82e965d30ee5653476441782205b66c800efc"
+  integrity sha512-dsp7uA9VZgLzkygbsNm9Q3krBcUchAs8urMCMyNIYgfHh5hWgcYf9Jkm9gGb0TE7QMswaXEwsEAzA3uOfyB3CQ==
+
 "@prisma/client@^4.3.1":
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/@prisma/client/-/client-4.3.1.tgz#b9aad9bd9bd43e7f715ec1d763c8bd9273688800"
@@ -2507,6 +2521,11 @@ cjs-module-lexer@^1.0.0:
   resolved "https://registry.yarnpkg.com/cjs-module-lexer/-/cjs-module-lexer-1.2.2.tgz#9f84ba3244a512f3a54e5277e8eef4c489864e40"
   integrity sha512-cOU9usZw8/dXIXKtwa8pM0OTJQuJkxMN6w30csNRUerHfeQ5R6U3kkU/FtJeIf3M202OHfY2U8ccInBG7/xogA==
 
+class-transformer@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/class-transformer/-/class-transformer-0.5.1.tgz#24147d5dffd2a6cea930a3250a677addf96ab336"
+  integrity sha512-SQa1Ws6hUbfC98vKGxZH3KFY0Y1lm5Zm0SY8XX9zbK7FJCyVEac3ATW0RIpwzW+oOfmHE5PMPufDG9hCfoEOMw==
+
 clean-stack@^2.0.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/clean-stack/-/clean-stack-2.2.0.tgz#ee8472dbb129e727b31e8a10a427dee9dfe4008b"
@@ -3631,6 +3650,11 @@ grapheme-splitter@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/grapheme-splitter/-/grapheme-splitter-1.0.4.tgz#9cf3a665c6247479896834af35cf1dbb4400767e"
   integrity sha512-bzh50DW9kTPM00T8y4o8vQg89Di9oLJVLW/KaOGIXJWP/iqCN6WKYkbNOF04vFLJhwcpYUh9ydh/+5vpOqV4YQ==
+
+graphql-fields@2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/graphql-fields/-/graphql-fields-2.0.3.tgz#5e68dff7afbb202be4f4f40623e983b22c96ab8f"
+  integrity sha512-x3VE5lUcR4XCOxPIqaO4CE+bTK8u6gVouOdpQX9+EKHr+scqtK5Pp/l8nIGqIpN1TUlkKE6jDCCycm/WtLRAwA==
 
 graphql-tag@2.12.6, graphql-tag@^2.11.0:
   version "2.12.6"
@@ -6185,7 +6209,7 @@ ts-node@^10.0.0:
     v8-compile-cache-lib "^3.0.1"
     yn "3.1.1"
 
-tsconfig-paths-webpack-plugin@4.0.0:
+tsconfig-paths-webpack-plugin@4.0.0, tsconfig-paths-webpack-plugin@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/tsconfig-paths-webpack-plugin/-/tsconfig-paths-webpack-plugin-4.0.0.tgz#84008fc3e3e0658fdb0262758b07b4da6265ff1a"
   integrity sha512-fw/7265mIWukrSHd0i+wSwx64kYUSAKPfxRDksjKIYTxSAp9W9/xcZVBF4Kl0eqQd5eBpAQ/oQrc5RyM/0c1GQ==

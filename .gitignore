@@ -37,3 +37,9 @@ lerna-debug.log*
 .vscode
 
 .env
+
+@generated
+
+*.dbml
+
+*.pdf

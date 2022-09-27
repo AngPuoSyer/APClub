@@ -31,8 +31,19 @@ import { UserModule } from './user/user.module';
       },
       inject: [ConfigService],
     }),
-    PrismaModule.forRootAsync({
+    PrismaModule.forRoot({
       isGlobal: true,
+      // useFactory: async (eventEmitter: EventEmitter2) => {
+      //   return {
+      //     middlewares: [
+      //       excludeDeletedMiddleware,
+      //       onSoftDeleteMiddleware,
+      //       onAssetDeletedMiddleware(eventEmitter),
+      //       prismaLoggingMiddleware(),
+      //     ],
+      //   };
+      // },
+      // inject: [EventEmitter2],
     }),
     UserModule,
   ],
