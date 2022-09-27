@@ -4,7 +4,7 @@
   "description": "",
   "author": "",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
@@ -18,7 +18,26 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./apps/backend/test/jest-e2e.json"
+    "test:e2e": "jest --config ./apps/backend/test/jest-e2e.json",
+    "migrate:dev": "prisma migrate dev --name",
+    "migrate:push": "prisma db push",
+    "migrate:dev:create": "prisma migrate dev --create-only ",
+    "migrate:reset": "prisma migrate reset ",
+    "migrate:deploy": "npx prisma migrate deploy ",
+    "migrate:status": "npx prisma migrate status ",
+    "migrate:resolve": "npx prisma migrate resolve ",
+    "prisma:studio": "npx prisma studio",
+    "prisma:generate": "npx prisma generate",
+    "prisma:generate:watch": "npx prisma generate --watch",
+    "start:db": "npm run migrate:up && npm run prisma:generate && npm run seed",
+    "seed": "prisma db seed",
+    "docker:migrate": "docker-compose -f docker-compose.migrate.yml up -d",
+    "docker:db": "docker-compose -f docker-compose.db.yml up -d",
+    "docker:seed": "docker exec -it nest-api npm run seed",
+    "docker": "docker-compose up -d",
+    "docker:build": "docker-compose build",
+    "init": "npx prisma migrate deploy && npx prisma generate && npm run seed",
+    "script": "ts-node src/script.ts"
   },
   "dependencies": {
     "@nestjs/apollo": "^10.1.0",
@@ -87,5 +106,8 @@
     "roots": [
       "<rootDir>/apps/"
     ]
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
   }
 }
