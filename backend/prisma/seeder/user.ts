@@ -1,4 +1,4 @@
-import { UserSignUpArgs } from '@core/src/user/user-auth.service';
+import { UserSignUpArgs } from '@core/src/modules/auth/user-auth.service';
 import { PrismaClient } from '@prisma/client';
 import { isEmpty } from 'lodash';
 import { hashSync, genSaltSync } from 'bcrypt';
