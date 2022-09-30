@@ -10,15 +10,9 @@ import { genSalt, hash, compare } from 'bcrypt';
 import { isEmpty } from 'lodash';
 import { PrismaService } from 'nestjs-prisma';
 import { UserService } from '../user/user.service';
+import { UserSignUpInput } from './dto/create-user.input';
 import { Token, TokenPayload } from './dto/token-payload.dto';
-
-export type UserSignUpArgs = {
-  username: string;
-  email: string;
-  password: string;
-  tpNumber: string;
-  contactNumber?: string;
-};
+import { StudentStatusEnum } from '@generated/prisma/student-status.enum';
 
 @Injectable()
 export class UserAuthService {
@@ -30,7 +24,7 @@ export class UserAuthService {
   ) {}
 
   async signUpUser(
-    { username, email, password, tpNumber, contactNumber }: UserSignUpArgs,
+    { username, email, password, tpNumber, contactNumber }: UserSignUpInput,
     select: any,
   ) {
     const checkUser = await this.prismaService.user.findFirst({
@@ -61,7 +55,10 @@ export class UserAuthService {
         password: passwordHash,
       },
     });
-    return this.userService.deletePasswordField(user);
+
+    return this.generateTokens(
+      new TokenPayload(user.id, user.status as StudentStatusEnum),
+    );
   }
 
   async loginUser(email: string, password: string) {

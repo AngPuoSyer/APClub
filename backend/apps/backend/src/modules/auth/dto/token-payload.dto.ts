@@ -8,6 +8,11 @@ export class TokenPayload {
 
   @Field(() => StudentStatusEnum)
   status: StudentStatusEnum;
+
+  constructor(userId: string, status: StudentStatusEnum) {
+    this.userId = userId;
+    this.status = status;
+  }
 }
 
 @ObjectType()
@@ -17,4 +22,9 @@ export class Token {
 
   @Field()
   refreshToken: string;
+
+  constructor(accessToken: string, refreshToken: string) {
+    this.accessToken = accessToken;
+    this.refreshToken = refreshToken;
+  }
 }
