@@ -1,11 +1,11 @@
-import { UserSignUpArgs } from '@core/src/modules/auth/user-auth.service';
 import { PrismaClient } from '@prisma/client';
 import { isEmpty } from 'lodash';
 import { hashSync, genSaltSync } from 'bcrypt';
+import { UserSignUpInput } from '@core/src/modules/auth/dto/create-user.input';
 
 const prisma = new PrismaClient();
 
-const users: UserSignUpArgs[] = [
+const users: UserSignUpInput[] = [
   {
     username: 'Rice',
     email: 'rice@mail.com',
