@@ -15,6 +15,10 @@ export class UserService {
     return this.prismaService.user.findFirst(userFindFirstArgs);
   }
 
+  async updateOneUser(userUpdateArgs: Prisma.UserUpdateArgs) {
+    this.prismaService.user.update(userUpdateArgs);
+  }
+
   deletePasswordField(user: User): User {
     const u = { ...user };
     delete u['password'];
