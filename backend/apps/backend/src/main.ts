@@ -1,7 +1,7 @@
 import { ConfigService } from '@nestjs/config';
 import { HttpAdapterHost, NestFactory } from '@nestjs/core';
 import { PrismaClientExceptionFilter } from 'nestjs-prisma';
-import { CorsConfig, NestConfig } from '../common/config/config.interface';
+import { CorsConfig, NestConfig } from './common/config/config.interface';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
