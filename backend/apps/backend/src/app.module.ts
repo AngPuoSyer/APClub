@@ -24,7 +24,7 @@ import { AuthModule } from './modules/auth/auth.module';
           },
           sortSchema: graphqlConfig.sortSchema,
           autoSchemaFile:
-            graphqlConfig.schemaDestination || './src/schema.graphql',
+            graphqlConfig.schemaDestination || './backend/src/schema.graphql',
           debug: graphqlConfig.debug,
           playground: graphqlConfig.playgroundEnabled,
           context: ({ req }) => ({ req }),

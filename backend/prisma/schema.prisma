@@ -38,35 +38,37 @@ model User {
   contactNumber String?           @unique
   status        StudentStatusEnum @default(ACTIVE)
   // clubAdmin     ClubAdmin[]
+  ClubAdmin     ClubAdmin[]
 }
 
-// model ClubAdmin {
-//   id    String @id
-//   label String
+model ClubAdmin {
+  id    String @id
+  label String
 
-//   userId String
-//   user   User   @relation(fields: [userId], references: [id])
-//   clubId String
-//   club   Club   @relation(fields: [clubId], references: [id])
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+  clubId String
+  club   Club   @relation(fields: [clubId], references: [id])
 
-//   role ClubAdminRoleEnum
-// }
+  role      ClubAdminRoleEnum
+  roleLabel String
+}
 
-// model SuperAdmin {
-//   id       String @id @default(uuid())
-//   email    String
-//   username String
-//   password String
-// }
+model SuperAdmin {
+  id       String @id @default(uuid())
+  email    String
+  username String
+  password String
+}
 
-// model Club {
-//   id          String         @id @default(uuid())
-//   name        String
-//   description String
-//   status      ClubStatusEnum
+model Club {
+  id          String         @id @default(uuid())
+  name        String
+  description String
+  status      ClubStatusEnum
 
-//   clubAdmin ClubAdmin[]
-// }
+  clubAdmin ClubAdmin[]
+}
 
 enum StudentStatusEnum {
   ACTIVE
@@ -74,19 +76,19 @@ enum StudentStatusEnum {
   GRADUATED
 }
 
-// enum ClubAdminRoleEnum {
-//   PRESIDENT
-//   VICE_PRESIDENT
-//   SECRETARY
-//   ASSISTANT_SECRETARY
-//   TREASURER
-//   ASSISTANT_TREASURER
-//   COMMITEE
-// }
+enum ClubAdminRoleEnum {
+  PRESIDENT
+  VICE_PRESIDENT
+  SECRETARY
+  ASSISTANT_SECRETARY
+  TREASURER
+  ASSISTANT_TREASURER
+  COMMITEE
+}
 
-// enum ClubStatusEnum {
-//   ACTIVE
-//   INACTIVE
-//   INVALIDATED
-//   DEPRECATED
-// }
+enum ClubStatusEnum {
+  ACTIVE
+  INACTIVE
+  INVALIDATED
+  DEPRECATED
+}
