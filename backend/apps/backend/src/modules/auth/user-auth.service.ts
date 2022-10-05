@@ -13,6 +13,7 @@ import { UserService } from '../user/user.service';
 import { UserSignUpInput } from './dto/create-user.input';
 import { Token, TokenPayload } from './dto/token-payload.dto';
 import { StudentStatusEnum } from '@generated/prisma/student-status.enum';
+import { User } from '@prisma/client';
 
 @Injectable()
 export class UserAuthService {
@@ -97,6 +98,12 @@ export class UserAuthService {
   async getUserFromToken(token: string, select?: any) {
     const id = this.decodeToken(token).userId;
     return this.prismaService.user.findUnique({ where: { id }, ...select });
+  }
+
+  async validateUser(userId: string): Promise<User> {
+    return this.prismaService.user.findUnique({
+      where: { id: userId },
+    });
   }
 
   private decodeToken(token: string): TokenPayload {

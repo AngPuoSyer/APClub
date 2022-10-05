@@ -1,3 +1,4 @@
+import { Logger } from '@nestjs/common';
 import { Args, Info, Mutation, Resolver } from '@nestjs/graphql';
 import { PrismaSelect } from '@paljs/plugins';
 import { UserSignUpInput } from './dto/create-user.input';
@@ -7,6 +8,8 @@ import { UserAuthService } from './user-auth.service';
 
 @Resolver()
 export class UserAuthResolver {
+  private logger = new Logger(UserAuthResolver.name);
+
   constructor(private readonly authService: UserAuthService) {}
 
   @Mutation(() => Token)

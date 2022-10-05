@@ -3,6 +3,9 @@ import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
+import { GqlAuthGuard } from './decorator/gql-auth.guard';
+import { JwtStrategy } from './decorator/jwt.strategy';
+import { UserAuthResolver } from './user-auth.resolver';
 import { UserAuthService } from './user-auth.service';
 
 @Module({
@@ -21,7 +24,7 @@ import { UserAuthService } from './user-auth.service';
       inject: [ConfigService],
     }),
   ],
-  providers: [UserAuthService],
+  providers: [UserAuthService, UserAuthResolver, JwtStrategy, GqlAuthGuard],
   exports: [],
 })
 export class AuthModule {}
