@@ -48,8 +48,20 @@ import { AuthModule } from './modules/auth/auth.module';
     }),
     UserModule,
     AuthModule,
+    ClubAdminModule,
+    SuperAdminModule,
+    ClubModule,
+    ClubRequestModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
+
+// TODO: Migrate Individually
+// TODO: Role Guard (Refer to lavax)
+// TODO: super admin create club
+// TODO: admin make change request // task queue
+// TODO: super admin approve request
+// TODO: pagination
+// TODO: remmove password field
