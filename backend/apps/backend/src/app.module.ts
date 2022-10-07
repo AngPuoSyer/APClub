@@ -9,6 +9,9 @@ import { GraphqlConfig } from './common/config/config.interface';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { ClubAdminModule } from './modules/club-admin/club-admin.module';
+import { SuperAdminModule } from './modules/super-admin/super-admin.module';
+import { ClubModule } from './modules/club/club.module';
 
 @Module({
   imports: [
