@@ -37,8 +37,8 @@ model User {
   tpNumber      String            @unique
   contactNumber String?           @unique
   status        StudentStatusEnum @default(ACTIVE)
-  // clubAdmin     ClubAdmin[]
-  ClubAdmin     ClubAdmin[]
+
+  clubAdmin ClubAdmin[]
 }
 
 model ClubAdmin {
@@ -50,8 +50,9 @@ model ClubAdmin {
   clubId String
   club   Club   @relation(fields: [clubId], references: [id])
 
-  role      ClubAdminRoleEnum
-  roleLabel String
+  role        ClubAdminRoleEnum
+  roleLabel   String
+  clubRequest ClubRequest[]
 }
 
 model SuperAdmin {
@@ -68,6 +69,21 @@ model Club {
   status      ClubStatusEnum
 
   clubAdmin ClubAdmin[]
+}
+
+model ClubRequest {
+  id          String            @id @default(uuid())
+  title       String
+  description String
+  requestType RequestTypeEnum
+  status      RequestStatusEnum
+  jobId       String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  requesterId String
+  requester   ClubAdmin @relation(fields: [id], references: [id])
 }
 
 enum StudentStatusEnum {
@@ -91,4 +107,16 @@ enum ClubStatusEnum {
   INACTIVE
   INVALIDATED
   DEPRECATED
+}
+
+enum RequestStatusEnum {
+  UNDER_REVIEW
+  REJECTED
+  APPROVED
+}
+
+enum RequestTypeEnum {
+  ACTIVITY
+  INFORMATION
+  COMMITEE
 }
