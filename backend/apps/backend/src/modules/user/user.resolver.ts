@@ -3,12 +3,19 @@ import { UserService } from './user.service';
 import { FindFirstUserArgs } from '@generated/user/find-first-user.args';
 import { User } from '@generated/user/user.model';
 import { PrismaSelect } from '@paljs/plugins';
+import { RoleGuard } from '../auth/decorator/roles.decorator';
+import { UserRoleEnum } from '@core/src/common/roles.enum';
 
 @Resolver()
 export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
   @Query(() => User)
+  @RoleGuard(
+    UserRoleEnum.WILDCARD,
+    UserRoleEnum.CLUB_ADMIN,
+    UserRoleEnum.MEMBER,
+  )
   async userFindOne(
     @Args() userFindFirstArgs: FindFirstUserArgs,
     @Info() info,

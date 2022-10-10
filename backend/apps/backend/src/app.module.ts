@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import config from './common/config/config';
 import { PrismaModule } from 'nestjs-prisma';
@@ -12,6 +11,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { ClubAdminModule } from './modules/club-admin/club-admin.module';
 import { SuperAdminModule } from './modules/super-admin/super-admin.module';
 import { ClubModule } from './modules/club/club.module';
+import { ClubRequestModule } from './modules/club-request/club-request.module';
 
 @Module({
   imports: [
@@ -54,8 +54,16 @@ import { ClubModule } from './modules/club/club.module';
     ClubAdminModule,
     SuperAdminModule,
     ClubModule,
+    ClubRequestModule,
   ],
-  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
+
+// TODO: Migrate Individually
+// TODO: Role Guard (Refer to lavax)
+// TODO: super admin create club
+// TODO: admin make change request // task queue
+// TODO: super admin approve request
+// TODO: pagination
+// TODO: remmove password field

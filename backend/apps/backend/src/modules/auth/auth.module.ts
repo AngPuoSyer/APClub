@@ -3,10 +3,11 @@ import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
-import { GqlAuthGuard } from './decorator/gql-auth.guard';
-import { JwtStrategy } from './decorator/jwt.strategy';
-import { UserAuthResolver } from './user-auth.resolver';
-import { UserAuthService } from './user-auth.service';
+import { GqlAuthGuard } from './guard/gql-auth.guard';
+import { UserRoleGuard } from './guard/roles.guard';
+import { JwtStrategy } from './jwt.strategy';
+import { AuthResolver } from './auth.resolver';
+import { AuthService } from './auth.service';
 
 @Module({
   imports: [
@@ -24,7 +25,13 @@ import { UserAuthService } from './user-auth.service';
       inject: [ConfigService],
     }),
   ],
-  providers: [UserAuthService, UserAuthResolver, JwtStrategy, GqlAuthGuard],
+  providers: [
+    AuthService,
+    AuthResolver,
+    JwtStrategy,
+    GqlAuthGuard,
+    UserRoleGuard,
+  ],
   exports: [],
 })
 export class AuthModule {}

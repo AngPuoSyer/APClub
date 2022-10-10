@@ -9,18 +9,16 @@ import { JwtService } from '@nestjs/jwt';
 import { genSalt, hash, compare } from 'bcrypt';
 import { isEmpty } from 'lodash';
 import { PrismaService } from 'nestjs-prisma';
-import { UserService } from '../user/user.service';
 import { UserSignUpInput } from './dto/create-user.input';
 import { Token, TokenPayload } from './dto/token-payload.dto';
 import { StudentStatusEnum } from '@generated/prisma/student-status.enum';
 import { User } from '@prisma/client';
 
 @Injectable()
-export class UserAuthService {
+export class AuthService {
   constructor(
     private readonly prismaService: PrismaService,
     private readonly jwtService: JwtService,
-    private readonly userService: UserService,
     private readonly configService: ConfigService,
   ) {}
 
@@ -71,7 +69,61 @@ export class UserAuthService {
     if (isEmpty(user)) throw new UnauthorizedException('Invalid Credentials');
     if (await compare(password, user.password))
       throw new UnauthorizedException('Invalid Credentials');
-    return this.userService.deletePasswordField(user);
+    return this.generateTokens(
+      new TokenPayload(user.id, user.status as StudentStatusEnum),
+    );
+  }
+
+  async loginClubAdmin(email: string, password: string) {
+    const admin = await this.prismaService.clubAdmin.findFirst({
+      where: {
+        user: {
+          email: email,
+        },
+      },
+      include: {
+        user: true,
+      },
+    });
+    if (isEmpty(admin)) throw new UnauthorizedException('Invalid Credentials');
+    if (await compare(password, admin.user.password))
+      throw new UnauthorizedException('Invalid Credentials');
+    return this.generateTokens(
+      new TokenPayload(admin.user.id, admin.user.status as StudentStatusEnum),
+    );
+  }
+
+  async createOneSuperAdmin(username: string, password: string) {
+    const sa = await this.prismaService.superAdmin.findFirst({
+      where: {
+        username,
+      },
+    });
+    if (sa) throw new ConflictException('Super Admin Exisis');
+    const hashedPassword = await this.generatePassword(password);
+    const newSA = await this.prismaService.superAdmin.create({
+      data: {
+        username,
+        password: hashedPassword,
+      },
+    });
+    return this.generateTokens(
+      new TokenPayload(newSA.id, StudentStatusEnum.ACTIVE),
+    );
+  }
+
+  async loginSuperAdmin(username: string, password: string) {
+    const admin = await this.prismaService.superAdmin.findFirst({
+      where: {
+        username,
+      },
+    });
+    if (isEmpty(admin)) throw new UnauthorizedException('Invalid Credentials');
+    if (await compare(password, admin.password))
+      throw new UnauthorizedException('Invalid Credentials');
+    return this.generateTokens(
+      new TokenPayload(admin.id, StudentStatusEnum.ACTIVE),
+    );
   }
 
   generateTokens(payload: TokenPayload): Token {
