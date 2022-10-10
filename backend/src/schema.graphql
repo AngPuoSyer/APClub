@@ -2,11 +2,230 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Club {
+  _count: ClubCount!
+  clubAdmin: [ClubAdmin!]
+  description: String!
+  id: ID!
+  name: String!
+  status: ClubStatusEnum!
+}
+
+type ClubAdmin {
+  _count: ClubAdminCount!
+  club: Club!
+  clubId: String!
+  clubRequest: [ClubRequest!]
+  id: ID!
+  label: String!
+  role: ClubAdminRoleEnum!
+  roleLabel: String!
+  user: User!
+  userId: String!
+}
+
+type ClubAdminCount {
+  clubRequest: Int!
+}
+
+input ClubAdminListRelationFilter {
+  every: ClubAdminWhereInput
+  none: ClubAdminWhereInput
+  some: ClubAdminWhereInput
+}
+
+input ClubAdminOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input ClubAdminRelationFilter {
+  is: ClubAdminWhereInput
+  isNot: ClubAdminWhereInput
+}
+
+enum ClubAdminRoleEnum {
+  ASSISTANT_SECRETARY
+  ASSISTANT_TREASURER
+  COMMITEE
+  PRESIDENT
+  SECRETARY
+  TREASURER
+  VICE_PRESIDENT
+}
+
+input ClubAdminWhereInput {
+  AND: [ClubAdminWhereInput!]
+  NOT: [ClubAdminWhereInput!]
+  OR: [ClubAdminWhereInput!]
+  club: ClubRelationFilter
+  clubId: StringFilter
+  clubRequest: ClubRequestListRelationFilter
+  id: StringFilter
+  label: StringFilter
+  role: EnumClubAdminRoleEnumFilter
+  roleLabel: StringFilter
+  user: UserRelationFilter
+  userId: StringFilter
+}
+
+type ClubCount {
+  clubAdmin: Int!
+}
+
+input ClubRelationFilter {
+  is: ClubWhereInput
+  isNot: ClubWhereInput
+}
+
+type ClubRequest {
+  createdAt: DateTime!
+  description: String!
+  id: ID!
+  requestType: RequestTypeEnum!
+  requester: ClubAdmin!
+  requesterId: String!
+  status: RequestStatusEnum!
+  title: String!
+  updatedAt: DateTime!
+}
+
+input ClubRequestListRelationFilter {
+  every: ClubRequestWhereInput
+  none: ClubRequestWhereInput
+  some: ClubRequestWhereInput
+}
+
+input ClubRequestWhereInput {
+  AND: [ClubRequestWhereInput!]
+  NOT: [ClubRequestWhereInput!]
+  OR: [ClubRequestWhereInput!]
+  createdAt: DateTimeFilter
+  description: StringFilter
+  id: StringFilter
+  requestType: EnumRequestTypeEnumFilter
+  requester: ClubAdminRelationFilter
+  requesterId: StringFilter
+  status: EnumRequestStatusEnumFilter
+  title: StringFilter
+  updatedAt: DateTimeFilter
+}
+
+enum ClubStatusEnum {
+  ACTIVE
+  DEPRECATED
+  INACTIVE
+  INVALIDATED
+}
+
+input ClubWhereInput {
+  AND: [ClubWhereInput!]
+  NOT: [ClubWhereInput!]
+  OR: [ClubWhereInput!]
+  clubAdmin: ClubAdminListRelationFilter
+  description: StringFilter
+  id: StringFilter
+  name: StringFilter
+  status: EnumClubStatusEnumFilter
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+input DateTimeFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeFilter
+  notIn: [DateTime!]
+}
+
+input EnumClubAdminRoleEnumFilter {
+  equals: ClubAdminRoleEnum
+  in: [ClubAdminRoleEnum!]
+  not: NestedEnumClubAdminRoleEnumFilter
+  notIn: [ClubAdminRoleEnum!]
+}
+
+input EnumClubStatusEnumFilter {
+  equals: ClubStatusEnum
+  in: [ClubStatusEnum!]
+  not: NestedEnumClubStatusEnumFilter
+  notIn: [ClubStatusEnum!]
+}
+
+input EnumRequestStatusEnumFilter {
+  equals: RequestStatusEnum
+  in: [RequestStatusEnum!]
+  not: NestedEnumRequestStatusEnumFilter
+  notIn: [RequestStatusEnum!]
+}
+
+input EnumRequestTypeEnumFilter {
+  equals: RequestTypeEnum
+  in: [RequestTypeEnum!]
+  not: NestedEnumRequestTypeEnumFilter
+  notIn: [RequestTypeEnum!]
+}
+
 input EnumStudentStatusEnumFilter {
   equals: StudentStatusEnum
   in: [StudentStatusEnum!]
   not: NestedEnumStudentStatusEnumFilter
   notIn: [StudentStatusEnum!]
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type Mutation {
+  loginUser(data: LoginInput!): Token!
+  userSignUp(data: UserSignUpInput!): Token!
+}
+
+input NestedDateTimeFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeFilter
+  notIn: [DateTime!]
+}
+
+input NestedEnumClubAdminRoleEnumFilter {
+  equals: ClubAdminRoleEnum
+  in: [ClubAdminRoleEnum!]
+  not: NestedEnumClubAdminRoleEnumFilter
+  notIn: [ClubAdminRoleEnum!]
+}
+
+input NestedEnumClubStatusEnumFilter {
+  equals: ClubStatusEnum
+  in: [ClubStatusEnum!]
+  not: NestedEnumClubStatusEnumFilter
+  notIn: [ClubStatusEnum!]
+}
+
+input NestedEnumRequestStatusEnumFilter {
+  equals: RequestStatusEnum
+  in: [RequestStatusEnum!]
+  not: NestedEnumRequestStatusEnumFilter
+  notIn: [RequestStatusEnum!]
+}
+
+input NestedEnumRequestTypeEnumFilter {
+  equals: RequestTypeEnum
+  in: [RequestTypeEnum!]
+  not: NestedEnumRequestTypeEnumFilter
+  notIn: [RequestTypeEnum!]
 }
 
 input NestedEnumStudentStatusEnumFilter {
@@ -55,6 +274,18 @@ enum QueryMode {
   insensitive
 }
 
+enum RequestStatusEnum {
+  APPROVED
+  REJECTED
+  UNDER_REVIEW
+}
+
+enum RequestTypeEnum {
+  ACTIVITY
+  COMMITEE
+  INFORMATION
+}
+
 enum SortOrder {
   asc
   desc
@@ -98,7 +329,14 @@ enum StudentStatusEnum {
   INACTIVE
 }
 
+type Token {
+  accessToken: String!
+  refreshToken: String!
+}
+
 type User {
+  _count: UserCount!
+  clubAdmin: [ClubAdmin!]
   contactNumber: String
   email: String!
   id: ID!
@@ -106,6 +344,10 @@ type User {
   status: StudentStatusEnum!
   tpNumber: String!
   username: String!
+}
+
+type UserCount {
+  clubAdmin: Int!
 }
 
 enum UserOrderByRelevanceFieldEnum {
@@ -125,6 +367,7 @@ input UserOrderByRelevanceInput {
 
 input UserOrderByWithRelationAndSearchRelevanceInput {
   _relevance: UserOrderByRelevanceInput
+  clubAdmin: ClubAdminOrderByRelationAggregateInput
   contactNumber: SortOrder
   email: SortOrder
   id: SortOrder
@@ -132,6 +375,11 @@ input UserOrderByWithRelationAndSearchRelevanceInput {
   status: SortOrder
   tpNumber: SortOrder
   username: SortOrder
+}
+
+input UserRelationFilter {
+  is: UserWhereInput
+  isNot: UserWhereInput
 }
 
 enum UserScalarFieldEnum {
@@ -144,10 +392,19 @@ enum UserScalarFieldEnum {
   username
 }
 
+input UserSignUpInput {
+  contactNumber: String!
+  email: String!
+  password: String!
+  tpNumber: String!
+  username: String!
+}
+
 input UserWhereInput {
   AND: [UserWhereInput!]
   NOT: [UserWhereInput!]
   OR: [UserWhereInput!]
+  clubAdmin: ClubAdminListRelationFilter
   contactNumber: StringNullableFilter
   email: StringFilter
   id: StringFilter

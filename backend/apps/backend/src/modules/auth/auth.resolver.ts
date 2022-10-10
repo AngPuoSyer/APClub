@@ -4,17 +4,17 @@ import { PrismaSelect } from '@paljs/plugins';
 import { UserSignUpInput } from './dto/create-user.input';
 import { LoginInput } from './dto/login.input';
 import { Token } from './dto/token-payload.dto';
-import { UserAuthService } from './user-auth.service';
+import { AuthService } from './auth.service';
 
 @Resolver()
-export class UserAuthResolver {
-  private logger = new Logger(UserAuthResolver.name);
+export class AuthResolver {
+  private logger = new Logger(AuthResolver.name);
 
-  constructor(private readonly authService: UserAuthService) {}
+  constructor(private readonly authService: AuthService) {}
 
   @Mutation(() => Token)
   async userSignUp(
-    @Args() data: UserSignUpInput,
+    @Args('data') data: UserSignUpInput,
     @Info() info,
   ): Promise<Token> {
     const select = new PrismaSelect(info).value;
@@ -24,5 +24,15 @@ export class UserAuthResolver {
   @Mutation(() => Token)
   async loginUser(@Args('data') { email, password }: LoginInput) {
     return this.authService.loginUser(email, password);
+  }
+
+  @Mutation(() => Token)
+  async loginClubAdmin(@Args('data') { email, password }: LoginInput) {
+    return this.authService.loginClubAdmin(email, password);
+  }
+
+  @Mutation(() => Token)
+  async loginSuperAdmin({ email, password }: LoginInput) {
+    return this.authService.loginSuperAdmin(email, password);
   }
 }
