@@ -11,13 +11,8 @@ export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
   @Query(() => User)
-  @RoleGuard(
-    UserRoleEnum.WILDCARD,
-    UserRoleEnum.CLUB_ADMIN,
-    UserRoleEnum.MEMBER,
-  )
   async userFindOne(
-    @Args() userFindFirstArgs: FindFirstUserArgs,
+    @Args({ nullable: true }) userFindFirstArgs: FindFirstUserArgs,
     @Info() info,
   ) {
     const select = new PrismaSelect(info).value;
