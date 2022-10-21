@@ -1,4 +1,4 @@
-import { SecurityConfig } from '@core/src/common/config/config.interface';
+import { SecurityConfig } from '@app/common/config/config.interface';
 import {
   ConflictException,
   Injectable,
@@ -13,6 +13,7 @@ import { UserSignUpInput } from './dto/create-user.input';
 import { Token, TokenPayload } from './dto/token-payload.dto';
 import { StudentStatusEnum } from '@generated/prisma/student-status.enum';
 import { User } from '@prisma/client';
+import { UserRoleEnum } from '@core/src/common/roles.enum';
 
 @Injectable()
 export class AuthService {
@@ -56,7 +57,11 @@ export class AuthService {
     });
 
     return this.generateTokens(
-      new TokenPayload(user.id, user.status as StudentStatusEnum),
+      new TokenPayload(
+        user.id,
+        UserRoleEnum.MEMBER,
+        user.status as StudentStatusEnum,
+      ),
     );
   }
 
@@ -67,10 +72,14 @@ export class AuthService {
       },
     });
     if (isEmpty(user)) throw new UnauthorizedException('Invalid Credentials');
-    if (await compare(password, user.password))
+    if (!(await compare(password, user.password)))
       throw new UnauthorizedException('Invalid Credentials');
     return this.generateTokens(
-      new TokenPayload(user.id, user.status as StudentStatusEnum),
+      new TokenPayload(
+        user.id,
+        UserRoleEnum.MEMBER,
+        user.status as StudentStatusEnum,
+      ),
     );
   }
 
@@ -86,10 +95,14 @@ export class AuthService {
       },
     });
     if (isEmpty(admin)) throw new UnauthorizedException('Invalid Credentials');
-    if (await compare(password, admin.user.password))
+    if (!(await compare(password, admin.user.password)))
       throw new UnauthorizedException('Invalid Credentials');
     return this.generateTokens(
-      new TokenPayload(admin.user.id, admin.user.status as StudentStatusEnum),
+      new TokenPayload(
+        admin.user.id,
+        UserRoleEnum.CLUB_ADMIN,
+        admin.user.status as StudentStatusEnum,
+      ),
     );
   }
 
@@ -107,9 +120,11 @@ export class AuthService {
         password: hashedPassword,
       },
     });
-    return this.generateTokens(
-      new TokenPayload(newSA.id, StudentStatusEnum.ACTIVE),
-    );
+    return this.generateTokens({
+      userId: newSA.id,
+      role: UserRoleEnum.SUPERADMIN,
+      status: StudentStatusEnum.ACTIVE,
+    });
   }
 
   async loginSuperAdmin(username: string, password: string) {
@@ -119,27 +134,43 @@ export class AuthService {
       },
     });
     if (isEmpty(admin)) throw new UnauthorizedException('Invalid Credentials');
-    if (await compare(password, admin.password))
+    if (!(await compare(password, admin.password)))
       throw new UnauthorizedException('Invalid Credentials');
     return this.generateTokens(
-      new TokenPayload(admin.id, StudentStatusEnum.ACTIVE),
+      new TokenPayload(
+        admin.id,
+        UserRoleEnum.SUPERADMIN,
+        StudentStatusEnum.ACTIVE,
+      ),
     );
   }
 
   generateTokens(payload: TokenPayload): Token {
     return {
-      accessToken: this.generateAccessToken(payload),
-      refreshToken: this.generateRefreshToken(payload),
+      accessToken: this.generateAccessToken(
+        payload.userId,
+        payload.role,
+        payload.status,
+      ),
+      refreshToken: this.generateRefreshToken(
+        payload.userId,
+        payload.role,
+        payload.status,
+      ),
     };
   }
 
   refreshToken(token: string) {
     try {
-      const { userId, status } = this.jwtService.verify<TokenPayload>(token, {
-        secret: this.configService.get('JWT_REFRESH_SECRET'),
-      });
+      const { userId, status, role } = this.jwtService.verify<TokenPayload>(
+        token,
+        {
+          secret: this.configService.get('JWT_REFRESH_SECRET'),
+        },
+      );
       return this.generateTokens({
         userId,
+        role,
         status,
       });
     } catch (e) {
@@ -162,16 +193,27 @@ export class AuthService {
     return this.jwtService.decode(token) as TokenPayload;
   }
 
-  private generateAccessToken(payload: TokenPayload): string {
-    return this.jwtService.sign(payload);
+  private generateAccessToken(
+    userId: string,
+    role: UserRoleEnum,
+    status: StudentStatusEnum,
+  ): string {
+    return this.jwtService.sign({ userId, role, status });
   }
 
-  private generateRefreshToken(payload: TokenPayload): string {
+  private generateRefreshToken(
+    userId: string,
+    role: UserRoleEnum,
+    status: StudentStatusEnum,
+  ): string {
     const securityConfig = this.configService.get<SecurityConfig>('security');
-    return this.jwtService.sign(payload, {
-      secret: this.configService.get('JWT_REFRESH_SECRET'),
-      expiresIn: securityConfig.refreshIn,
-    });
+    return this.jwtService.sign(
+      { userId, status, role },
+      {
+        secret: this.configService.get('JWT_REFRESH_SECRET'),
+        expiresIn: securityConfig.refreshIn,
+      },
+    );
   }
 
   private async generatePassword(pass: string, saltRound: number = 10) {

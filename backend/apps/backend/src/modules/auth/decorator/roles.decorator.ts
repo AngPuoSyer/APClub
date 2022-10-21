@@ -8,7 +8,7 @@ export const roleMetadata = 'roles';
 export const RoleGuard = (...roles: UserRoleEnum[]) => {
   return applyDecorators(
     SetMetadata(roleMetadata, roles),
-    // UseGuards(GqlAuthGuard),
+    UseGuards(GqlAuthGuard),
     UseGuards(UserRoleGuard),
   );
 };
