@@ -11,6 +11,37 @@ services:
     volumes:
       - postgres:/var/lib/postgresql/data
 
+  rabbitmq:
+    image: rabbitmq:3.11.0-management-alpine
+    container_name: 'apclub_rabbitmq'
+    ports:
+        - 5672:5672
+        - 15672:15672
+    volumes:
+        - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+        - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+        - rabbitmq_go_net
+
+  redis:
+    image: redis:7.0.5-alpine
+    container_name: apclub_redis
+    restart: always
+    ports:
+      - 6379:6379
+    volumes:
+      - redis:/var/lib/redis_cache/data
+
+
+networks:
+  rabbitmq_go_net:
+    driver: bridge
+      
+
 volumes:
   postgres:
-    name: novalearn-db
+    name: apclub_postgres
+  redis:
+    name: apclub_redis
+  rabbitmq:
+    name: apclub_rabbitmq
