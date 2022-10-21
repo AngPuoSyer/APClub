@@ -38,7 +38,11 @@ model User {
   contactNumber String?           @unique
   status        StudentStatusEnum @default(ACTIVE)
 
-  clubAdmin ClubAdmin[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  clubAdmin                  ClubAdmin[]
+  clubInfoChangeAdminRequest ClubInfoChangeAdminRequest[]
 }
 
 model ClubAdmin {
@@ -50,15 +54,22 @@ model ClubAdmin {
   clubId String
   club   Club   @relation(fields: [clubId], references: [id])
 
-  role        ClubAdminRoleEnum
-  roleLabel   String
-  clubRequest ClubRequest[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  role            ClubAdminRoleEnum
+  roleLabel       String
+  clubAdminStatus ClubAdminStatusEnum
+  clubRequest     ClubInfoChangeRequest[]
 }
 
 model SuperAdmin {
   id       String @id @default(uuid())
   username String
   password String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Club {
@@ -67,22 +78,46 @@ model Club {
   description String
   status      ClubStatusEnum
 
-  clubAdmin ClubAdmin[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  clubAdmin             ClubAdmin[]
+  clubInfoChangeRequest ClubInfoChangeRequest[]
 }
 
-model ClubRequest {
-  id          String            @id @default(uuid())
-  title       String
+model ClubInfoChangeRequest {
+  id                String            @id @default(uuid())
+  title             String
+  changeDescription String
+  changeStatus      RequestStatusEnum
+  jobId             String?
+
+  name        String            @unique
   description String
-  requestType RequestTypeEnum
   status      RequestStatusEnum
-  jobId       String
+  expireDate  DateTime
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  requesterId String
-  requester   ClubAdmin @relation(fields: [id], references: [id])
+  requesterId                String
+  requester                  ClubAdmin                    @relation(fields: [requesterId], references: [id], onDelete: NoAction)
+  clubId                     String
+  club                       Club                         @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  clubInfoChangeAdminRequest ClubInfoChangeAdminRequest[]
+}
+
+model ClubInfoChangeAdminRequest {
+  id    String @id
+  label String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId              String
+  user                User                  @relation(fields: [userId], references: [id])
+  clubChangeRequestId String
+  club                ClubInfoChangeRequest @relation(fields: [clubChangeRequestId], references: [id], onDelete: Cascade)
 }
 
 enum StudentStatusEnum {
@@ -118,4 +153,10 @@ enum RequestTypeEnum {
   ACTIVITY
   INFORMATION
   COMMITEE
+}
+
+enum ClubAdminStatusEnum {
+  ACTIVE
+  RETIRED
+  IN_REVIEW
 }
