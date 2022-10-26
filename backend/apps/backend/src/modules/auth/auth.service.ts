@@ -12,8 +12,10 @@ import { PrismaService } from 'nestjs-prisma';
 import { UserSignUpInput } from './dto/create-user.input';
 import { Token, TokenPayload } from './dto/token-payload.dto';
 import { StudentStatusEnum } from '@generated/prisma/student-status.enum';
-import { User } from '@prisma/client';
+import { ClubAdmin, SuperAdmin, User } from '@prisma/client';
 import { UserRoleEnum } from '@core/src/common/roles.enum';
+
+export type UserReturnType = User | SuperAdmin | ClubAdmin;
 
 @Injectable()
 export class AuthService {
@@ -183,9 +185,25 @@ export class AuthService {
     return this.prismaService.user.findUnique({ where: { id }, ...select });
   }
 
-  async validateUser(userId: string): Promise<User> {
-    return this.prismaService.user.findUnique({
-      where: { id: userId },
+  async validateUser<T extends UserReturnType>(
+    userId: string,
+    role: UserRoleEnum,
+  ): Promise<T> {
+    return this.prismaService[role].findFirst({
+      where: {
+        OR: [
+          {
+            id: userId,
+          },
+          ...(role === UserRoleEnum.CLUB_ADMIN
+            ? [
+                {
+                  userId: userId,
+                },
+              ]
+            : []),
+        ],
+      },
     });
   }
 
