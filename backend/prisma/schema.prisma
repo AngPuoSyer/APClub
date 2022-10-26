@@ -46,8 +46,7 @@ model User {
 }
 
 model ClubAdmin {
-  id    String @id
-  label String
+  id String @id @default(uuid())
 
   userId String
   user   User   @relation(fields: [userId], references: [id])
@@ -59,8 +58,10 @@ model ClubAdmin {
 
   role            ClubAdminRoleEnum
   roleLabel       String
-  clubAdminStatus ClubAdminStatusEnum
+  clubAdminStatus ClubAdminStatusEnum     @default(ACTIVE)
   clubRequest     ClubInfoChangeRequest[]
+
+  @@unique([userId, clubId])
 }
 
 model SuperAdmin {
@@ -76,7 +77,7 @@ model Club {
   id          String         @id @default(uuid())
   name        String         @unique
   description String
-  status      ClubStatusEnum
+  status      ClubStatusEnum @default(ACTIVE)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
