@@ -36,6 +36,6 @@ export class ClubResolver {
     @Info() info,
   ) {
     const select = new PrismaSelect(info).value;
-    this.clubService.create({ ...createOneClubInput, ...select });
+    return this.clubService.create({ ...createOneClubInput, ...select });
   }
 }
