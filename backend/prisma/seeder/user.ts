@@ -66,9 +66,7 @@ const users: UserSignUpInput[] = [
 
 export const seedUser = async () => {
   const check = await prisma.user.findMany();
-  console.log(check);
   if (!isEmpty(check)) return;
-  console.log('another');
   return prisma.user.createMany({
     data: users.map((u) => {
       const password = hashSync(u.password, genSaltSync(10));

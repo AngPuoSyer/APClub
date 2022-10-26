@@ -15,12 +15,13 @@ export class UserRoleGuard implements CanActivate {
       roleMetadata,
       [ctx.getHandler(), ctx.getClass()],
     );
-    if (roles.includes(UserRoleEnum.WILDCARD)) return true;
-    for (const role of roles) {
-      if (!isEmpty(req[role])) return true;
+    if (
+      roles.includes(UserRoleEnum.WILDCARD) ||
+      roles.includes(req.user.role)
+    ) {
+      return true;
     }
-    return true;
-    // TODO: change to false once user role is successfully implemented
+    return false;
     // return false;
   }
 

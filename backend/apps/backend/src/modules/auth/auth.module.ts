@@ -1,4 +1,4 @@
-import { SecurityConfig } from '@core/src/common/config/config.interface';
+import { SecurityConfig } from '@app/common/config/config.interface';
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';

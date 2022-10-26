@@ -3,6 +3,8 @@ export interface Config {
   cors: CorsConfig;
   graphql: GraphqlConfig;
   security: SecurityConfig;
+  redis: RedisConfig;
+  rabbitmq: RabbitMqConfig;
 }
 
 export interface NestConfig {
@@ -29,4 +31,15 @@ export interface SecurityConfig {
   jwtAccessSecret: string;
   jwtRefreshSecret: string;
   jwtResetSecret: string;
+}
+
+export interface RedisConfig {
+  redisPort: number;
+  redisHost: string;
+}
+
+export interface RabbitMqConfig {
+  rabbitMqUrl: string;
+  rabbitMqPort: number;
+  rabbitMqHost: string;
 }

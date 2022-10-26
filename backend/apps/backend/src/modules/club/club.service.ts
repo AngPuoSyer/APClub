@@ -6,7 +6,7 @@ import { PrismaService } from 'nestjs-prisma';
 export class ClubService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  create(createOneClubArgs: Prisma.ClubCreateArgs) {
+  async create(createOneClubArgs: Prisma.ClubCreateArgs) {
     return this.prismaService.club.create(createOneClubArgs);
   }
 

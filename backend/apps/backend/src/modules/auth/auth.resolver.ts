@@ -32,7 +32,7 @@ export class AuthResolver {
   }
 
   @Mutation(() => Token)
-  async loginSuperAdmin({ email, password }: LoginInput) {
+  async loginSuperAdmin(@Args('data') { email, password }: LoginInput) {
     return this.authService.loginSuperAdmin(email, password);
   }
 }

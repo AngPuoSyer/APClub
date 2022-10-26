@@ -18,14 +18,24 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@core": ["apps/backend"],
-      "@core/*": ["apps/backend/*"],
-            "@generated/*": [
+      "@core": [
+        "apps/backend"
+      ],
+      "@core/*": [
+        "apps/backend/*"
+      ],
+      "@generated/*": [
         "prisma/@generated/*"
       ],
       "@generated": [
         "prisma/@generated"
       ],
+      "@app/common": [
+        "libs/common/src"
+      ],
+      "@app/common/*": [
+        "libs/common/src/*"
+      ]
     }
   }
 }
