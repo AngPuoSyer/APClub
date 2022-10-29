@@ -43,6 +43,8 @@ model User {
 
   clubAdmin                  ClubAdmin[]
   clubInfoChangeAdminRequest ClubInfoChangeAdminRequest[]
+  clubMember                 ClubMember[]
+  clubEventMember            ClubEventMember[]
 }
 
 model ClubAdmin {
@@ -73,6 +75,23 @@ model SuperAdmin {
   updatedAt DateTime @updatedAt
 }
 
+model ClubMember {
+  id String @id @default(uuid())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+  clubId String
+  club   Club   @relation(fields: [clubId], references: [id])
+
+  status ClubMemberStatusEnum
+
+  deletedAt DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@unique([userId, clubId])
+}
+
 model Club {
   id          String         @id @default(uuid())
   name        String         @unique
@@ -84,6 +103,8 @@ model Club {
 
   clubAdmin             ClubAdmin[]
   clubInfoChangeRequest ClubInfoChangeRequest[]
+  clubEvent             ClubEvent[]
+  clubMember            ClubMember[]
 }
 
 model ClubInfoChangeRequest {
@@ -119,6 +140,37 @@ model ClubInfoChangeAdminRequest {
   user                User                  @relation(fields: [userId], references: [id])
   clubChangeRequestId String
   club                ClubInfoChangeRequest @relation(fields: [clubChangeRequestId], references: [id], onDelete: Cascade)
+}
+
+model ClubEvent {
+  id          String              @id @default(uuid())
+  name        String
+  description String
+  startAt     DateTime
+  endAt       DateTime
+  memberOnly  Boolean             @default(false)
+  changed     Boolean             @default(false)
+  status      ClubEventStatusEnum @default(IN_REVIEW)
+  thumbnail   String?
+
+  clubId String
+  club   Club   @relation(fields: [clubId], references: [id])
+
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  clubEventMember ClubEventMember[]
+}
+
+model ClubEventMember {
+  id String @id @default(uuid())
+
+  userId  String
+  user    User      @relation(fields: [userId], references: [id])
+  eventId String
+  event   ClubEvent @relation(fields: [eventId], references: [id])
+
+  status     ClubMemberEventStatusEnum     @default(JOINED)
+  attendance ClubMemberEventAttendanceEnum @default(ABSENT)
 }
 
 enum StudentStatusEnum {
@@ -160,4 +212,29 @@ enum ClubAdminStatusEnum {
   ACTIVE
   RETIRED
   IN_REVIEW
+}
+
+enum ClubEventStatusEnum {
+  IN_REVIEW
+  ONGOING
+  CANCELLED
+  AWAITING
+}
+
+enum ClubMemberStatusEnum {
+  ACTIVE
+  INACTIVE
+  LEFT
+  PREMIUM
+}
+
+enum ClubMemberEventStatusEnum {
+  JOINED
+  LEFT
+}
+
+enum ClubMemberEventAttendanceEnum {
+  PRESENT
+  ABSENT
+  LEAVE
 }
