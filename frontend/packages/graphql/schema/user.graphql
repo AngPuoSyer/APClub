@@ -1,0 +1,37 @@
+query getUserSelections(
+  $cursor: UserWhereUniqueInput
+  $distinct: [UserScalarFieldEnum!]
+  $orderBy: [UserOrderByWithRelationAndSearchRelevanceInput!]
+  $skip: Int
+  $take: Int
+  $where: UserWhereInput
+) {
+  findManyUser(
+    cursor: $cursor
+    distinct: $distinct
+    orderBy: $orderBy
+    skip: $skip
+    take: $take
+    where: $where
+  ) {
+    id
+    username
+  }
+}
+
+query getMe {
+  getMe {
+    ...UserField
+  }
+}
+
+fragment UserField on User {
+  id
+  username
+  contactNumber
+  email
+  status
+  tpNumber
+  createdAt
+  updatedAt
+}

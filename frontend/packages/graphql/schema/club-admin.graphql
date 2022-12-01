@@ -1,0 +1,10 @@
+fragment ClubAdminField on ClubAdmin {
+  id
+  clubAdminStatus
+  clubId
+  createdAt
+  role
+  roleLabel
+  updatedAt
+  userId
+}

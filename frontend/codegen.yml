@@ -1,0 +1,12 @@
+overwrite: true
+schema: "http://localhost:8000/graphql"
+documents: "./packages/graphql/schema/*.graphql"
+generates:
+  packages/graphql/schema/generated/graphql.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-vue-urql"
+  packages/graphql/schema/generated/graphql.schema.json:
+    plugins:
+      - "urql-introspection"

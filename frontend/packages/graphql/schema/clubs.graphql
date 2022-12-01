@@ -1,0 +1,48 @@
+query findManyClub(
+  $cursor: ClubWhereUniqueInput
+  $distinct: [ClubScalarFieldEnum!]
+  $orderBy: [ClubOrderByWithRelationAndSearchRelevanceInput!]
+  $skip: Int
+  $take: Int
+  $where: ClubWhereInput
+) {
+  findManyClub(
+    cursor: $cursor
+    distinct: $distinct
+    orderBy: $orderBy
+    skip: $skip
+    take: $take
+    where: $where
+  ) {
+    ...ClubField
+  }
+}
+
+query clubTotalCount {
+  clubTotalCount
+}
+
+query getClubsByAdmin {
+  getClubsByAdmin {
+    ...ClubField
+  }
+}
+
+mutation createOneClub($data: ClubCreateInput!) {
+  createOneClub(data: $data) {
+    ...ClubField
+    clubAdmin {
+      ...ClubAdminField
+    }
+  }
+}
+
+fragment ClubField on Club {
+  id
+  createdAt
+  description
+  name
+  status
+  updatedAt
+  label
+}
