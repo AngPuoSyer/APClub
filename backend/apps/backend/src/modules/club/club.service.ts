@@ -25,4 +25,8 @@ export class ClubService {
   updateMany(updateManyClubArgs: Prisma.ClubUpdateManyArgs) {
     return this.prismaService.club.updateMany(updateManyClubArgs);
   }
+
+  countTotal() {
+    return this.prismaService.club.count();
+  }
 }
