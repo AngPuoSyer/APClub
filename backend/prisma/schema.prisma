@@ -96,6 +96,9 @@ model Club {
   id          String         @id @default(uuid())
   name        String         @unique
   description String
+  label       String         @unique
+  thumbnail   String?
+  logo        String?
   status      ClubStatusEnum @default(ACTIVE)
 
   createdAt DateTime @default(now())

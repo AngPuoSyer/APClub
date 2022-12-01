@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { seedClub } from './seeder/club';
 import { seedSuperAdmin } from './seeder/superadmin';
 import { seedUser } from './seeder/user';
 
@@ -9,6 +10,7 @@ async function seed() {
   if (env !== 'production') {
     await seedUser();
     await seedSuperAdmin();
+    await seedClub();
   }
 }
 
