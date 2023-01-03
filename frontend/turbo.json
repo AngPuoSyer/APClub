@@ -13,6 +13,9 @@
     },
     "prepare": {
       "cache": false
+    },
+    "preview": {
+      "outputs": []
     }
   }
 }
