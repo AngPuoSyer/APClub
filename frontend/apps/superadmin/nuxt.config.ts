@@ -1,5 +1,10 @@
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
+  runtimeConfig: {
+    public: {
+      backendUrl: process.env.BACKEND_URL || "localhost:8000/graphql",
+    },
+  },
   app: {
     head: {
       charset: "utf-16",

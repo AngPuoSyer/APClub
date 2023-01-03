@@ -13,9 +13,10 @@ import {
 import { createClient, provideClient } from "@urql/vue";
 import { useAuthStore } from "./store/auth.store";
 
+const config = useRuntimeConfig()
 const authStore = useAuthStore();
 const client = createClient({
-    url: import.meta.env.BACKEND_URL as string || "http://localhost:8000/graphql",
+    url: config.public.backendUrl || "http://localhost:8000/graphql",
     fetchOptions: () => {
       return {
         headers: { Authorization: `Bearer ${authStore.accessToken}` },
