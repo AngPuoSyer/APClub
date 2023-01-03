@@ -1,24 +1,11 @@
-FROM node:lts-alpine3.17
-
-RUN apk update 
-RUN apk add --no-cache make gcc g++ python3 
-RUN apk --no-cache add --virtual builds-deps build-base 
-RUN apk add openssl1.1-compat
-
-
-# ARG NODE_ENV=production
-# ENV NODE_ENV=${NODE_ENV}
-
+FROM node:lts
 WORKDIR /usr/src/app
 
 COPY ./backend/package*.json ./backend/yarn.lock ./
-COPY ./backend/prisma/schema.prisma ./prisma/schema.prisma
-
 ENV PUPPETEER_SKIP_DOWNLOAD=ture
 RUN yarn && yarn cache clean --all
 
-RUN apk del make gcc g++ python3 builds-deps build-base
-
+COPY ./backend/prisma/schema.prisma ./prisma/schema.prisma
 RUN npx prisma generate
 
 COPY ./backend .

@@ -9,7 +9,7 @@ datasource db {
 generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["fullTextSearch", "fullTextIndex"]
-  binaryTargets   = ["native", "linux-musl"]
+  // binaryTargets   = ["native", "linux-musl"]
 }
 
 // generator dbml {
