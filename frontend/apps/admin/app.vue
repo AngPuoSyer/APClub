@@ -16,7 +16,7 @@ import { useAuthStore } from "./store/auth.store";
 
 const authStore = useAuthStore();
 const client = createClient({
-  url: "http://localhost:8000/graphql",
+  url: process.env.BACKEND_URL || "http://localhost:8000/graphql",
   fetchOptions: () => {
     return {
       headers: { Authorization: `Bearer ${authStore.accessToken}` },
