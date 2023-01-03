@@ -14,6 +14,7 @@ WORKDIR /usr/src/app
 COPY ./backend/package*.json ./backend/yarn.lock ./
 COPY ./backend/prisma/schema.prisma ./prisma/schema.prisma
 
+ENV PUPPETEER_SKIP_DOWNLOAD=ture
 RUN yarn && yarn cache clean --all
 
 RUN apk del make gcc g++ python3 builds-deps build-base
