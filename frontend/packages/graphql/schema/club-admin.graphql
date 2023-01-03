@@ -1,0 +1,33 @@
+query findManyClubAdmin(
+  $cursor: ClubAdminWhereUniqueInput
+  $distinct: [ClubAdminScalarFieldEnum!]
+  $orderBy: [ClubAdminOrderByWithRelationAndSearchRelevanceInput!]
+  $skip: Int
+  $take: Int
+  $where: ClubAdminWhereInput
+) {
+  findManyClubAdmin(
+    cursor: $cursor
+    distinct: $distinct
+    orderBy: $orderBy
+    skip: $skip
+    take: $take
+    where: $where
+  ) {
+    ...ClubAdminField
+    user {
+      ...UserField
+    }
+  }
+}
+
+fragment ClubAdminField on ClubAdmin {
+  id
+  clubAdminStatus
+  clubId
+  createdAt
+  role
+  roleLabel
+  updatedAt
+  userId
+}

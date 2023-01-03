@@ -1,0 +1,26 @@
+mutation loginSuperAdmin($data: LoginInput!) {
+  loginSuperAdmin(data: $data) {
+    ...TokenFragment
+  }
+}
+
+mutation loginClubAdmin($data: LoginInput!) {
+  loginClubAdmin(data: $data) {
+    ...TokenFragment
+  }
+}
+
+mutation loginUser($data: LoginInput!) {
+  loginUser(data: $data) {
+    ...TokenFragment
+  }
+}
+
+mutation refreshToken($token: String!) {
+  refreshToken(refreshToken: $token)
+}
+
+fragment TokenFragment on Token {
+  accessToken
+  refreshToken
+}

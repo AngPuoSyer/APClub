@@ -67,4 +67,8 @@ export class EventMemberService {
   delete(data: Prisma.ClubEventMemberDeleteArgs) {
     return this.prismaService.clubEventMember.delete(data);
   }
+
+  count(data: Prisma.ClubEventMemberCountArgs) {
+    return this.prismaService.clubEventMember.count(data);
+  }
 }

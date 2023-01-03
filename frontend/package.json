@@ -1,0 +1,33 @@
+{
+  "name": "apclub",
+  "version": "0.0.1",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "lint": "turbo run lint",
+    "prepare": "turbo run prepare",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "gql:generate": "graphql-codegen --config codegen.yml"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^2.13.8",
+    "@graphql-codegen/named-operations-object": "^2.3.1",
+    "@graphql-codegen/typescript": "^2.8.2",
+    "@graphql-codegen/typescript-operations": "^2.5.5",
+    "@graphql-codegen/typescript-vue-urql": "^2.3.5",
+    "@graphql-codegen/urql-introspection": "^2.2.1",
+    "prettier": "latest",
+    "turbo": "latest",
+    "typescript": "^4.9.3"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "dependencies": {},
+  "packageManager": "yarn@1.22.19"
+}

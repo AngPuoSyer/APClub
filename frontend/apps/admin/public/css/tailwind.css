@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;
+
+.container {
+  @apply overflow-scroll ml-10 mt-8 h-[95vh] mr-6 !important;
+}
+
+.container-heading {
+  @apply text-4xl;
+}
+
+.container-sub {
+  @apply text-xl text-gray-500;
+}
+
+/* h3 {
+  @apply text-xl font-semibold !important;
+} */

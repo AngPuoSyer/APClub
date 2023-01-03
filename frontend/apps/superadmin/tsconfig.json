@@ -1,0 +1,7 @@
+{
+  // https://v3.nuxtjs.org/concepts/typescript
+  "path": {
+    "@apclub/graphql": "../../packages/graphql"
+  },
+  "extends": "./.nuxt/tsconfig.json",
+}

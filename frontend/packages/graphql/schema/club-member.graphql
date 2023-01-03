@@ -1,0 +1,63 @@
+query getMeMember($clubId: String!) {
+  getMeMember(clubId: $clubId) {
+    ...ClubMemberField
+  }
+}
+
+query findManyClubMember(
+  $cursor: ClubMemberWhereUniqueInput
+  $distinct: [ClubMemberScalarFieldEnum!]
+  $orderBy: [ClubMemberOrderByWithRelationAndSearchRelevanceInput!]
+  $skip: Int
+  $take: Int
+  $where: ClubMemberWhereInput
+) {
+  findManyClubMember(
+    cursor: $cursor
+    distinct: $distinct
+    orderBy: $orderBy
+    skip: $skip
+    take: $take
+    where: $where
+  ) {
+    ...ClubMemberField
+    user {
+      ...UserField
+    }
+  }
+}
+
+query countTotalClubMember($clubId: String!) {
+  countTotalClubMember(clubId: $clubId)
+}
+
+query getMyClubs {
+  getMyClubs {
+    club {
+      ...ClubField
+    }
+  }
+}
+
+mutation joinClub($clubId: String!) {
+  joinClub(clubId: $clubId) {
+    ...ClubMemberField
+  }
+}
+
+mutation leaveClub($clubId: String!) {
+  leaveClub(clubId: $clubId) {
+    ...ClubMemberField
+  }
+}
+
+fragment ClubMemberField on ClubMember {
+  id
+  clubId
+  createdAt
+  deletedAt
+  isAdmin
+  status
+  updatedAt
+  userId
+}

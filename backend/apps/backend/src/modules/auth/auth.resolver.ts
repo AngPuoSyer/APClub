@@ -5,6 +5,8 @@ import { UserSignUpInput } from './dto/create-user.input';
 import { LoginInput } from './dto/login.input';
 import { Token } from './dto/token-payload.dto';
 import { AuthService } from './auth.service';
+import { RoleGuard } from './decorator/roles.decorator';
+import { UserRoleEnum } from '@core/src/common/roles.enum';
 
 @Resolver()
 export class AuthResolver {
@@ -19,6 +21,13 @@ export class AuthResolver {
   ): Promise<Token> {
     const select = new PrismaSelect(info).value;
     return this.authService.signUpUser(data, select);
+  }
+
+  @Mutation(() => String)
+  async refreshToken(
+    @Args('refreshToken', { type: () => String }) refreshToken,
+  ) {
+    return this.authService.refreshToken(refreshToken);
   }
 
   @Mutation(() => Token)
