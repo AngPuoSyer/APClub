@@ -11,8 +11,8 @@ RUN apk add openssl1.1-compat
 
 WORKDIR /usr/src/app
 
-COPY package*.json yarn.lock ./
-COPY ./prisma/schema.prisma ./prisma/schema.prisma
+COPY ./backend/package*.json ./backend/yarn.lock ./
+COPY ./backend/prisma/schema.prisma ./prisma/schema.prisma
 
 RUN yarn && yarn cache clean --all
 
@@ -20,8 +20,8 @@ RUN apk del make gcc g++ python3 builds-deps build-base
 
 RUN npx prisma generate
 
-COPY . .
+COPY ./backend .
 
-RUN npm run build 
+RUN npm run build event-scheduler
 
-CMD ["yarn migrate:deploy && yarn start"]
+CMD ["yarn", "start", "event-scheduler"]
