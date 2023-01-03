@@ -29,28 +29,36 @@
         ]"
         responsiveLayout="scroll"
         removable-sort
+        ref="dtref"
       >
         <template #header>
           <div class="flex justify-between items-center py-1">
             <h3 class="m-0 text-xl">Clubs</h3>
             <div class="flex gap-2 items-center">
               <Button
-                label="Export"
-                icon="pi pi-upload"
-                class="p-button-secondary p-button-sm"
+                class="p-button-raised p-button-text p-button-plain"
+                icon="pi pi-refresh"
+                @click="refreshTable"
               />
               <span class="p-input-icon-left">
                 <i class="pi pi-search" />
                 <InputText
-                  placeholder="Search"
-                  class="rounded-2"
-                  v-on:input="debounceInput"
+                placeholder="Search"
+                class="rounded-2"
+                v-on:input="debounceInput"
+                :model-value="searchString"
                 />
               </span>
               <Button
+                label="Export"
+                icon="pi pi-upload"
+                class="p-button-secondary p-button-sm p-button-raised"
+                @click="exportCSV"
+              />
+              <Button
                 label="New"
                 icon="pi pi-plus"
-                class="p-button-success mr-2 p-button-sm"
+                class="p-button-success mr-2 p-button-sm p-button-raised"
                 @click="toCreate"
               />
             </div>
@@ -59,7 +67,9 @@
         <Column field="name" header="Name" :sortable="true">
           <template #body="{ data }">
             <Skeleton class="my-3" v-if="fetching" />
-            <span v-else>{{ data.name }}</span>
+            <NuxtLink v-else :to="`clubs/${data.id}`">
+              <span >{{ data.name }}</span>
+            </NuxtLink>
           </template>
         </Column>
         <Column field="label" header="label" :sortable="true">
@@ -95,7 +105,12 @@
         >
           <template #body>
             <Skeleton class="my-3" v-if="fetching" />
-            <Button type="button" icon="pi pi-eye" v-else />
+            <Button
+              class="p-button-raised"
+              type="button"
+              icon="pi pi-eye"
+              v-else
+            />
           </template>
         </Column>
       </DataTable>
@@ -115,7 +130,23 @@ import {
   ClubOrderByWithRelationAndSearchRelevanceInput,
 } from "@apclub/graphql";
 
-export type InlineMessageSeverityType = 'success' | 'info' | 'warn' | 'error' | undefined;
+export type InlineMessageSeverityType =
+  | "success"
+  | "info"
+  | "warn"
+  | "error"
+  | undefined;
+
+const dtref = ref()
+
+const { executeQuery: exportQuery } = useFindManyClubQuery({
+  pause: true
+})
+
+const exportCSV = async () => {
+  const { data } = await exportQuery() 
+  dtref.value.exportCSV(null, data.value?.findManyClub)
+}
 
 const searchString = ref("");
 const page = ref(1);
@@ -123,7 +154,6 @@ const limit = ref(25);
 const sort = ref<ClubOrderByWithRelationAndSearchRelevanceInput[]>([]);
 
 const debounceInput = useDebounceFn((e: Event) => {
-  console.log((e.target as any).value);
   searchString.value = (e.target as any).value;
 }, 800);
 
@@ -139,8 +169,6 @@ const onSort = (e: DataTableSortEvent) => {
 const toCreate = () => {
   navigateTo("clubs/create");
 };
-
-
 
 const { data: count } = useClubTotalCountQuery();
 const findManyClubQueryVariable = computed((): FindManyClubQueryVariables => {
@@ -169,6 +197,12 @@ const findManyClubQueryVariable = computed((): FindManyClubQueryVariables => {
     },
   };
 });
+
+const refreshTable = () => {
+  searchString.value = "";
+  page.value = 1;
+};
+
 
 const statusSererity = ref({
   ACTIVE: "success",

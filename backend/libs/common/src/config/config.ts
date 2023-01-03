@@ -16,8 +16,8 @@ const config: Config = {
     sortSchema: true,
   },
   security: {
-    expiresIn: '1h',
-    refreshIn: '7d',
+    expiresIn: '7d',
+    refreshIn: '1m',
     bcryptSaltOrRound: 10,
     jwtAccessSecret:
       process.env.JWT_ACCESS_SECRET || 'nestjsPrismaAccessSecret',

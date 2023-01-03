@@ -33,11 +33,6 @@ const contexts = ref<MenuItem[]>([
     icon: 'ph:users'
   },
   {
-    label: "Requests",
-    to: "/requests",
-    icon: 'ph:note-pencil-light'
-  },
-  {
     label: "Events",
     to: "/events",
     icon: 'ph:calendar'

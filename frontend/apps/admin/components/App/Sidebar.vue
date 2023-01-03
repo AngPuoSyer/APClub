@@ -5,9 +5,13 @@
     <div class="flex flex-col justify-between h-full">
       <div>
         <NuxtImg src="/apu-logo.png" format="webp" class="my-4" width="300" />
-        <AppNavContent />
+        <AppNavCotent />
       </div>
-      <div class="border-t border-gray-300">
+      <div class="">
+        <span class="p-float-label">
+          <Dropdown v-if="clubStore.clubFetched" :options="clubStore.clubs" option-label="label" v-model="clubStore.selectedClub" class="mt-4 w-full" @change="onSelectClub"/>
+          <label>Club</label>
+        </span>
         <div
           class="mt-2 pl-2 flex items-center justify-content py-2 hover:bg-gray-300 rounded transition duration-300"
           @click="toggleSuperadminMenu"
@@ -20,7 +24,7 @@
             size="large"
             shape="circle"
           />
-          <div class="ml-4">Super Admin</div>
+          <div class="ml-4">{{ authStore.user?.username ?? 'Admin'}}</div>
           <Menu id="superadmin-overlay-menu" ref="superadminMenuToggle" :model="superadminMenuItems" :popup="true"></Menu>
         </div>
       </div>
@@ -29,17 +33,17 @@
 </template>
 
 <script setup lang="ts">
+import { useAdminClubStore } from "~~/store";
 import { useAuthStore } from "~~/store/auth.store";
 
 const authStore = useAuthStore();
+const clubStore = useAdminClubStore()
 
 const superadminMenuToggle = ref<any>();
 
 const toggleSuperadminMenu = (e: any) => {
   superadminMenuToggle.value.toggle(e)
 };
-
-
 
 const superadminMenuItems = ref([
   {
@@ -51,6 +55,11 @@ const superadminMenuItems = ref([
     },
   },
 ]);
+
+const onSelectClub = (e: any) => {
+  navigateTo(`/clubs/${e.value.id}`)
+}
+
 </script>
 
 <style></style>

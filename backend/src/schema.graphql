@@ -2,6 +2,10 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+input BoolFieldUpdateOperationsInput {
+  set: Boolean
+}
+
 input BoolFilter {
   equals: Boolean
   not: NestedBoolFilter
@@ -151,6 +155,34 @@ input ClubAdminOrderByRelationAggregateInput {
   _count: SortOrder
 }
 
+enum ClubAdminOrderByRelevanceFieldEnum {
+  clubId
+  id
+  roleLabel
+  userId
+}
+
+input ClubAdminOrderByRelevanceInput {
+  fields: [ClubAdminOrderByRelevanceFieldEnum!]!
+  search: String!
+  sort: SortOrder!
+}
+
+input ClubAdminOrderByWithRelationAndSearchRelevanceInput {
+  _relevance: ClubAdminOrderByRelevanceInput
+  club: ClubOrderByWithRelationAndSearchRelevanceInput
+  clubAdminStatus: SortOrder
+  clubId: SortOrder
+  clubRequest: ClubInfoChangeRequestOrderByRelationAggregateInput
+  createdAt: SortOrder
+  id: SortOrder
+  role: SortOrder
+  roleLabel: SortOrder
+  updatedAt: SortOrder
+  user: UserOrderByWithRelationAndSearchRelevanceInput
+  userId: SortOrder
+}
+
 input ClubAdminRelationFilter {
   is: ClubAdminWhereInput
   isNot: ClubAdminWhereInput
@@ -166,10 +198,150 @@ enum ClubAdminRoleEnum {
   VICE_PRESIDENT
 }
 
+enum ClubAdminScalarFieldEnum {
+  clubAdminStatus
+  clubId
+  createdAt
+  id
+  role
+  roleLabel
+  updatedAt
+  userId
+}
+
+input ClubAdminScalarWhereInput {
+  AND: [ClubAdminScalarWhereInput!]
+  NOT: [ClubAdminScalarWhereInput!]
+  OR: [ClubAdminScalarWhereInput!]
+  clubAdminStatus: EnumClubAdminStatusEnumFilter
+  clubId: StringFilter
+  createdAt: DateTimeFilter
+  id: StringFilter
+  role: EnumClubAdminRoleEnumFilter
+  roleLabel: StringFilter
+  updatedAt: DateTimeFilter
+  userId: StringFilter
+}
+
 enum ClubAdminStatusEnum {
   ACTIVE
   IN_REVIEW
   RETIRED
+}
+
+input ClubAdminUpdateManyMutationInput {
+  clubAdminStatus: EnumClubAdminStatusEnumFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  role: EnumClubAdminRoleEnumFieldUpdateOperationsInput
+  roleLabel: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ClubAdminUpdateManyWithWhereWithoutClubInput {
+  data: ClubAdminUpdateManyMutationInput!
+  where: ClubAdminScalarWhereInput!
+}
+
+input ClubAdminUpdateManyWithWhereWithoutUserInput {
+  data: ClubAdminUpdateManyMutationInput!
+  where: ClubAdminScalarWhereInput!
+}
+
+input ClubAdminUpdateManyWithoutClubNestedInput {
+  connect: [ClubAdminWhereUniqueInput!]
+  connectOrCreate: [ClubAdminCreateOrConnectWithoutClubInput!]
+  create: [ClubAdminCreateWithoutClubInput!]
+  createMany: ClubAdminCreateManyClubInputEnvelope
+  delete: [ClubAdminWhereUniqueInput!]
+  deleteMany: [ClubAdminScalarWhereInput!]
+  disconnect: [ClubAdminWhereUniqueInput!]
+  set: [ClubAdminWhereUniqueInput!]
+  update: [ClubAdminUpdateWithWhereUniqueWithoutClubInput!]
+  updateMany: [ClubAdminUpdateManyWithWhereWithoutClubInput!]
+  upsert: [ClubAdminUpsertWithWhereUniqueWithoutClubInput!]
+}
+
+input ClubAdminUpdateManyWithoutUserNestedInput {
+  connect: [ClubAdminWhereUniqueInput!]
+  connectOrCreate: [ClubAdminCreateOrConnectWithoutUserInput!]
+  create: [ClubAdminCreateWithoutUserInput!]
+  createMany: ClubAdminCreateManyUserInputEnvelope
+  delete: [ClubAdminWhereUniqueInput!]
+  deleteMany: [ClubAdminScalarWhereInput!]
+  disconnect: [ClubAdminWhereUniqueInput!]
+  set: [ClubAdminWhereUniqueInput!]
+  update: [ClubAdminUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [ClubAdminUpdateManyWithWhereWithoutUserInput!]
+  upsert: [ClubAdminUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input ClubAdminUpdateOneRequiredWithoutClubRequestNestedInput {
+  connect: ClubAdminWhereUniqueInput
+  connectOrCreate: ClubAdminCreateOrConnectWithoutClubRequestInput
+  create: ClubAdminCreateWithoutClubRequestInput
+  update: ClubAdminUpdateWithoutClubRequestInput
+  upsert: ClubAdminUpsertWithoutClubRequestInput
+}
+
+input ClubAdminUpdateWithWhereUniqueWithoutClubInput {
+  data: ClubAdminUpdateWithoutClubInput!
+  where: ClubAdminWhereUniqueInput!
+}
+
+input ClubAdminUpdateWithWhereUniqueWithoutUserInput {
+  data: ClubAdminUpdateWithoutUserInput!
+  where: ClubAdminWhereUniqueInput!
+}
+
+input ClubAdminUpdateWithoutClubInput {
+  clubAdminStatus: EnumClubAdminStatusEnumFieldUpdateOperationsInput
+  clubRequest: ClubInfoChangeRequestUpdateManyWithoutRequesterNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  role: EnumClubAdminRoleEnumFieldUpdateOperationsInput
+  roleLabel: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutClubAdminNestedInput
+}
+
+input ClubAdminUpdateWithoutClubRequestInput {
+  club: ClubUpdateOneRequiredWithoutClubAdminNestedInput
+  clubAdminStatus: EnumClubAdminStatusEnumFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  role: EnumClubAdminRoleEnumFieldUpdateOperationsInput
+  roleLabel: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutClubAdminNestedInput
+}
+
+input ClubAdminUpdateWithoutUserInput {
+  club: ClubUpdateOneRequiredWithoutClubAdminNestedInput
+  clubAdminStatus: EnumClubAdminStatusEnumFieldUpdateOperationsInput
+  clubRequest: ClubInfoChangeRequestUpdateManyWithoutRequesterNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  role: EnumClubAdminRoleEnumFieldUpdateOperationsInput
+  roleLabel: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ClubAdminUpsertWithWhereUniqueWithoutClubInput {
+  create: ClubAdminCreateWithoutClubInput!
+  update: ClubAdminUpdateWithoutClubInput!
+  where: ClubAdminWhereUniqueInput!
+}
+
+input ClubAdminUpsertWithWhereUniqueWithoutUserInput {
+  create: ClubAdminCreateWithoutUserInput!
+  update: ClubAdminUpdateWithoutUserInput!
+  where: ClubAdminWhereUniqueInput!
+}
+
+input ClubAdminUpsertWithoutClubRequestInput {
+  create: ClubAdminCreateWithoutClubRequestInput!
+  update: ClubAdminUpdateWithoutClubRequestInput!
 }
 
 input ClubAdminUserIdClubIdCompoundUniqueInput {
@@ -335,11 +507,14 @@ type ClubEvent {
   createdAt: DateTime!
   description: String!
   endAt: DateTime!
+  eventEndJobId: String
+  eventStartJobId: String
   id: ID!
   memberOnly: Boolean!
   name: String!
+  requestJobId: String
   startAt: DateTime!
-  status: ClubEventStatusEnum!
+  status: clubEventStatusEnum!
   thumbnail: String
   updatedAt: DateTime!
 }
@@ -348,16 +523,38 @@ type ClubEventCount {
   clubEventMember: Int!
 }
 
+input ClubEventCreateInput {
+  changed: Boolean
+  club: ClubCreateNestedOneWithoutClubEventInput!
+  clubEventMember: ClubEventMemberCreateNestedManyWithoutEventInput
+  createdAt: DateTime
+  description: String!
+  endAt: DateTime!
+  eventEndJobId: String
+  eventStartJobId: String
+  id: String
+  memberOnly: Boolean
+  name: String!
+  requestJobId: String
+  startAt: DateTime!
+  status: clubEventStatusEnum
+  thumbnail: String
+  updatedAt: DateTime
+}
+
 input ClubEventCreateManyClubInput {
   changed: Boolean
   createdAt: DateTime
   description: String!
   endAt: DateTime!
+  eventEndJobId: String
+  eventStartJobId: String
   id: String
   memberOnly: Boolean
   name: String!
+  requestJobId: String
   startAt: DateTime!
-  status: ClubEventStatusEnum
+  status: clubEventStatusEnum
   thumbnail: String
   updatedAt: DateTime
 }
@@ -396,11 +593,14 @@ input ClubEventCreateWithoutClubEventMemberInput {
   createdAt: DateTime
   description: String!
   endAt: DateTime!
+  eventEndJobId: String
+  eventStartJobId: String
   id: String
   memberOnly: Boolean
   name: String!
+  requestJobId: String
   startAt: DateTime!
-  status: ClubEventStatusEnum
+  status: clubEventStatusEnum
   thumbnail: String
   updatedAt: DateTime
 }
@@ -411,11 +611,14 @@ input ClubEventCreateWithoutClubInput {
   createdAt: DateTime
   description: String!
   endAt: DateTime!
+  eventEndJobId: String
+  eventStartJobId: String
   id: String
   memberOnly: Boolean
   name: String!
+  requestJobId: String
   startAt: DateTime!
-  status: ClubEventStatusEnum
+  status: clubEventStatusEnum
   thumbnail: String
   updatedAt: DateTime
 }
@@ -428,18 +631,22 @@ input ClubEventListRelationFilter {
 
 type ClubEventMember {
   attendance: ClubMemberEventAttendanceEnum!
+  createdAt: DateTime!
   event: ClubEvent!
   eventId: String!
   id: ID!
   status: ClubMemberEventStatusEnum!
+  updatedAt: DateTime!
   user: User!
   userId: String!
 }
 
 input ClubEventMemberCreateManyEventInput {
   attendance: ClubMemberEventAttendanceEnum
+  createdAt: DateTime
   id: String
   status: ClubMemberEventStatusEnum
+  updatedAt: DateTime
   userId: String!
 }
 
@@ -450,9 +657,11 @@ input ClubEventMemberCreateManyEventInputEnvelope {
 
 input ClubEventMemberCreateManyUserInput {
   attendance: ClubMemberEventAttendanceEnum
+  createdAt: DateTime
   eventId: String!
   id: String
   status: ClubMemberEventStatusEnum
+  updatedAt: DateTime
 }
 
 input ClubEventMemberCreateManyUserInputEnvelope {
@@ -486,16 +695,20 @@ input ClubEventMemberCreateOrConnectWithoutUserInput {
 
 input ClubEventMemberCreateWithoutEventInput {
   attendance: ClubMemberEventAttendanceEnum
+  createdAt: DateTime
   id: String
   status: ClubMemberEventStatusEnum
+  updatedAt: DateTime
   user: UserCreateNestedOneWithoutClubEventMemberInput!
 }
 
 input ClubEventMemberCreateWithoutUserInput {
   attendance: ClubMemberEventAttendanceEnum
+  createdAt: DateTime
   event: ClubEventCreateNestedOneWithoutClubEventMemberInput!
   id: String
   status: ClubMemberEventStatusEnum
+  updatedAt: DateTime
 }
 
 input ClubEventMemberListRelationFilter {
@@ -508,25 +721,205 @@ input ClubEventMemberOrderByRelationAggregateInput {
   _count: SortOrder
 }
 
+enum ClubEventMemberOrderByRelevanceFieldEnum {
+  eventId
+  id
+  userId
+}
+
+input ClubEventMemberOrderByRelevanceInput {
+  fields: [ClubEventMemberOrderByRelevanceFieldEnum!]!
+  search: String!
+  sort: SortOrder!
+}
+
+input ClubEventMemberOrderByWithRelationAndSearchRelevanceInput {
+  _relevance: ClubEventMemberOrderByRelevanceInput
+  attendance: SortOrder
+  createdAt: SortOrder
+  event: ClubEventOrderByWithRelationAndSearchRelevanceInput
+  eventId: SortOrder
+  id: SortOrder
+  status: SortOrder
+  updatedAt: SortOrder
+  user: UserOrderByWithRelationAndSearchRelevanceInput
+  userId: SortOrder
+}
+
+enum ClubEventMemberScalarFieldEnum {
+  attendance
+  createdAt
+  eventId
+  id
+  status
+  updatedAt
+  userId
+}
+
+input ClubEventMemberScalarWhereInput {
+  AND: [ClubEventMemberScalarWhereInput!]
+  NOT: [ClubEventMemberScalarWhereInput!]
+  OR: [ClubEventMemberScalarWhereInput!]
+  attendance: EnumClubMemberEventAttendanceEnumFilter
+  createdAt: DateTimeFilter
+  eventId: StringFilter
+  id: StringFilter
+  status: EnumClubMemberEventStatusEnumFilter
+  updatedAt: DateTimeFilter
+  userId: StringFilter
+}
+
+input ClubEventMemberUpdateManyMutationInput {
+  attendance: EnumClubMemberEventAttendanceEnumFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  status: EnumClubMemberEventStatusEnumFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ClubEventMemberUpdateManyWithWhereWithoutEventInput {
+  data: ClubEventMemberUpdateManyMutationInput!
+  where: ClubEventMemberScalarWhereInput!
+}
+
+input ClubEventMemberUpdateManyWithWhereWithoutUserInput {
+  data: ClubEventMemberUpdateManyMutationInput!
+  where: ClubEventMemberScalarWhereInput!
+}
+
+input ClubEventMemberUpdateManyWithoutEventNestedInput {
+  connect: [ClubEventMemberWhereUniqueInput!]
+  connectOrCreate: [ClubEventMemberCreateOrConnectWithoutEventInput!]
+  create: [ClubEventMemberCreateWithoutEventInput!]
+  createMany: ClubEventMemberCreateManyEventInputEnvelope
+  delete: [ClubEventMemberWhereUniqueInput!]
+  deleteMany: [ClubEventMemberScalarWhereInput!]
+  disconnect: [ClubEventMemberWhereUniqueInput!]
+  set: [ClubEventMemberWhereUniqueInput!]
+  update: [ClubEventMemberUpdateWithWhereUniqueWithoutEventInput!]
+  updateMany: [ClubEventMemberUpdateManyWithWhereWithoutEventInput!]
+  upsert: [ClubEventMemberUpsertWithWhereUniqueWithoutEventInput!]
+}
+
+input ClubEventMemberUpdateManyWithoutUserNestedInput {
+  connect: [ClubEventMemberWhereUniqueInput!]
+  connectOrCreate: [ClubEventMemberCreateOrConnectWithoutUserInput!]
+  create: [ClubEventMemberCreateWithoutUserInput!]
+  createMany: ClubEventMemberCreateManyUserInputEnvelope
+  delete: [ClubEventMemberWhereUniqueInput!]
+  deleteMany: [ClubEventMemberScalarWhereInput!]
+  disconnect: [ClubEventMemberWhereUniqueInput!]
+  set: [ClubEventMemberWhereUniqueInput!]
+  update: [ClubEventMemberUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [ClubEventMemberUpdateManyWithWhereWithoutUserInput!]
+  upsert: [ClubEventMemberUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input ClubEventMemberUpdateWithWhereUniqueWithoutEventInput {
+  data: ClubEventMemberUpdateWithoutEventInput!
+  where: ClubEventMemberWhereUniqueInput!
+}
+
+input ClubEventMemberUpdateWithWhereUniqueWithoutUserInput {
+  data: ClubEventMemberUpdateWithoutUserInput!
+  where: ClubEventMemberWhereUniqueInput!
+}
+
+input ClubEventMemberUpdateWithoutEventInput {
+  attendance: EnumClubMemberEventAttendanceEnumFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  status: EnumClubMemberEventStatusEnumFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutClubEventMemberNestedInput
+}
+
+input ClubEventMemberUpdateWithoutUserInput {
+  attendance: EnumClubMemberEventAttendanceEnumFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  event: ClubEventUpdateOneRequiredWithoutClubEventMemberNestedInput
+  id: StringFieldUpdateOperationsInput
+  status: EnumClubMemberEventStatusEnumFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ClubEventMemberUpsertWithWhereUniqueWithoutEventInput {
+  create: ClubEventMemberCreateWithoutEventInput!
+  update: ClubEventMemberUpdateWithoutEventInput!
+  where: ClubEventMemberWhereUniqueInput!
+}
+
+input ClubEventMemberUpsertWithWhereUniqueWithoutUserInput {
+  create: ClubEventMemberCreateWithoutUserInput!
+  update: ClubEventMemberUpdateWithoutUserInput!
+  where: ClubEventMemberWhereUniqueInput!
+}
+
+input ClubEventMemberUserIdEventIdCompoundUniqueInput {
+  eventId: String!
+  userId: String!
+}
+
 input ClubEventMemberWhereInput {
   AND: [ClubEventMemberWhereInput!]
   NOT: [ClubEventMemberWhereInput!]
   OR: [ClubEventMemberWhereInput!]
   attendance: EnumClubMemberEventAttendanceEnumFilter
+  createdAt: DateTimeFilter
   event: ClubEventRelationFilter
   eventId: StringFilter
   id: StringFilter
   status: EnumClubMemberEventStatusEnumFilter
+  updatedAt: DateTimeFilter
   user: UserRelationFilter
   userId: StringFilter
 }
 
 input ClubEventMemberWhereUniqueInput {
   id: String
+  userId_eventId: ClubEventMemberUserIdEventIdCompoundUniqueInput
 }
 
 input ClubEventOrderByRelationAggregateInput {
   _count: SortOrder
+}
+
+enum ClubEventOrderByRelevanceFieldEnum {
+  clubId
+  description
+  eventEndJobId
+  eventStartJobId
+  id
+  name
+  requestJobId
+  thumbnail
+}
+
+input ClubEventOrderByRelevanceInput {
+  fields: [ClubEventOrderByRelevanceFieldEnum!]!
+  search: String!
+  sort: SortOrder!
+}
+
+input ClubEventOrderByWithRelationAndSearchRelevanceInput {
+  _relevance: ClubEventOrderByRelevanceInput
+  changed: SortOrder
+  club: ClubOrderByWithRelationAndSearchRelevanceInput
+  clubEventMember: ClubEventMemberOrderByRelationAggregateInput
+  clubId: SortOrder
+  createdAt: SortOrder
+  description: SortOrder
+  endAt: SortOrder
+  eventEndJobId: SortOrder
+  eventStartJobId: SortOrder
+  id: SortOrder
+  memberOnly: SortOrder
+  name: SortOrder
+  requestJobId: SortOrder
+  startAt: SortOrder
+  status: SortOrder
+  thumbnail: SortOrder
+  updatedAt: SortOrder
 }
 
 input ClubEventRelationFilter {
@@ -534,11 +927,158 @@ input ClubEventRelationFilter {
   isNot: ClubEventWhereInput
 }
 
-enum ClubEventStatusEnum {
-  AWAITING
-  CANCELLED
-  IN_REVIEW
-  ONGOING
+enum ClubEventScalarFieldEnum {
+  changed
+  clubId
+  createdAt
+  description
+  endAt
+  eventEndJobId
+  eventStartJobId
+  id
+  memberOnly
+  name
+  requestJobId
+  startAt
+  status
+  thumbnail
+  updatedAt
+}
+
+input ClubEventScalarWhereInput {
+  AND: [ClubEventScalarWhereInput!]
+  NOT: [ClubEventScalarWhereInput!]
+  OR: [ClubEventScalarWhereInput!]
+  changed: BoolFilter
+  clubId: StringFilter
+  createdAt: DateTimeFilter
+  description: StringFilter
+  endAt: DateTimeFilter
+  eventEndJobId: StringNullableFilter
+  eventStartJobId: StringNullableFilter
+  id: StringFilter
+  memberOnly: BoolFilter
+  name: StringFilter
+  requestJobId: StringNullableFilter
+  startAt: DateTimeFilter
+  status: EnumClubEventStatusEnumFilter
+  thumbnail: StringNullableFilter
+  updatedAt: DateTimeFilter
+}
+
+input ClubEventUpdateInput {
+  changed: BoolFieldUpdateOperationsInput
+  club: ClubUpdateOneRequiredWithoutClubEventNestedInput
+  clubEventMember: ClubEventMemberUpdateManyWithoutEventNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  endAt: DateTimeFieldUpdateOperationsInput
+  eventEndJobId: NullableStringFieldUpdateOperationsInput
+  eventStartJobId: NullableStringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  memberOnly: BoolFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  requestJobId: NullableStringFieldUpdateOperationsInput
+  startAt: DateTimeFieldUpdateOperationsInput
+  status: EnumClubEventStatusEnumFieldUpdateOperationsInput
+  thumbnail: NullableStringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ClubEventUpdateManyMutationInput {
+  changed: BoolFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  endAt: DateTimeFieldUpdateOperationsInput
+  eventEndJobId: NullableStringFieldUpdateOperationsInput
+  eventStartJobId: NullableStringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  memberOnly: BoolFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  requestJobId: NullableStringFieldUpdateOperationsInput
+  startAt: DateTimeFieldUpdateOperationsInput
+  status: EnumClubEventStatusEnumFieldUpdateOperationsInput
+  thumbnail: NullableStringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ClubEventUpdateManyWithWhereWithoutClubInput {
+  data: ClubEventUpdateManyMutationInput!
+  where: ClubEventScalarWhereInput!
+}
+
+input ClubEventUpdateManyWithoutClubNestedInput {
+  connect: [ClubEventWhereUniqueInput!]
+  connectOrCreate: [ClubEventCreateOrConnectWithoutClubInput!]
+  create: [ClubEventCreateWithoutClubInput!]
+  createMany: ClubEventCreateManyClubInputEnvelope
+  delete: [ClubEventWhereUniqueInput!]
+  deleteMany: [ClubEventScalarWhereInput!]
+  disconnect: [ClubEventWhereUniqueInput!]
+  set: [ClubEventWhereUniqueInput!]
+  update: [ClubEventUpdateWithWhereUniqueWithoutClubInput!]
+  updateMany: [ClubEventUpdateManyWithWhereWithoutClubInput!]
+  upsert: [ClubEventUpsertWithWhereUniqueWithoutClubInput!]
+}
+
+input ClubEventUpdateOneRequiredWithoutClubEventMemberNestedInput {
+  connect: ClubEventWhereUniqueInput
+  connectOrCreate: ClubEventCreateOrConnectWithoutClubEventMemberInput
+  create: ClubEventCreateWithoutClubEventMemberInput
+  update: ClubEventUpdateWithoutClubEventMemberInput
+  upsert: ClubEventUpsertWithoutClubEventMemberInput
+}
+
+input ClubEventUpdateWithWhereUniqueWithoutClubInput {
+  data: ClubEventUpdateWithoutClubInput!
+  where: ClubEventWhereUniqueInput!
+}
+
+input ClubEventUpdateWithoutClubEventMemberInput {
+  changed: BoolFieldUpdateOperationsInput
+  club: ClubUpdateOneRequiredWithoutClubEventNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  endAt: DateTimeFieldUpdateOperationsInput
+  eventEndJobId: NullableStringFieldUpdateOperationsInput
+  eventStartJobId: NullableStringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  memberOnly: BoolFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  requestJobId: NullableStringFieldUpdateOperationsInput
+  startAt: DateTimeFieldUpdateOperationsInput
+  status: EnumClubEventStatusEnumFieldUpdateOperationsInput
+  thumbnail: NullableStringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ClubEventUpdateWithoutClubInput {
+  changed: BoolFieldUpdateOperationsInput
+  clubEventMember: ClubEventMemberUpdateManyWithoutEventNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  endAt: DateTimeFieldUpdateOperationsInput
+  eventEndJobId: NullableStringFieldUpdateOperationsInput
+  eventStartJobId: NullableStringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  memberOnly: BoolFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  requestJobId: NullableStringFieldUpdateOperationsInput
+  startAt: DateTimeFieldUpdateOperationsInput
+  status: EnumClubEventStatusEnumFieldUpdateOperationsInput
+  thumbnail: NullableStringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ClubEventUpsertWithWhereUniqueWithoutClubInput {
+  create: ClubEventCreateWithoutClubInput!
+  update: ClubEventUpdateWithoutClubInput!
+  where: ClubEventWhereUniqueInput!
+}
+
+input ClubEventUpsertWithoutClubEventMemberInput {
+  create: ClubEventCreateWithoutClubEventMemberInput!
+  update: ClubEventUpdateWithoutClubEventMemberInput!
 }
 
 input ClubEventWhereInput {
@@ -552,9 +1092,12 @@ input ClubEventWhereInput {
   createdAt: DateTimeFilter
   description: StringFilter
   endAt: DateTimeFilter
+  eventEndJobId: StringNullableFilter
+  eventStartJobId: StringNullableFilter
   id: StringFilter
   memberOnly: BoolFilter
   name: StringFilter
+  requestJobId: StringNullableFilter
   startAt: DateTimeFilter
   status: EnumClubEventStatusEnumFilter
   thumbnail: StringNullableFilter
@@ -650,6 +1193,101 @@ input ClubInfoChangeAdminRequestListRelationFilter {
 
 input ClubInfoChangeAdminRequestOrderByRelationAggregateInput {
   _count: SortOrder
+}
+
+input ClubInfoChangeAdminRequestScalarWhereInput {
+  AND: [ClubInfoChangeAdminRequestScalarWhereInput!]
+  NOT: [ClubInfoChangeAdminRequestScalarWhereInput!]
+  OR: [ClubInfoChangeAdminRequestScalarWhereInput!]
+  clubChangeRequestId: StringFilter
+  createdAt: DateTimeFilter
+  id: StringFilter
+  label: StringFilter
+  updatedAt: DateTimeFilter
+  userId: StringFilter
+}
+
+input ClubInfoChangeAdminRequestUpdateManyMutationInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  label: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ClubInfoChangeAdminRequestUpdateManyWithWhereWithoutClubInput {
+  data: ClubInfoChangeAdminRequestUpdateManyMutationInput!
+  where: ClubInfoChangeAdminRequestScalarWhereInput!
+}
+
+input ClubInfoChangeAdminRequestUpdateManyWithWhereWithoutUserInput {
+  data: ClubInfoChangeAdminRequestUpdateManyMutationInput!
+  where: ClubInfoChangeAdminRequestScalarWhereInput!
+}
+
+input ClubInfoChangeAdminRequestUpdateManyWithoutClubNestedInput {
+  connect: [ClubInfoChangeAdminRequestWhereUniqueInput!]
+  connectOrCreate: [ClubInfoChangeAdminRequestCreateOrConnectWithoutClubInput!]
+  create: [ClubInfoChangeAdminRequestCreateWithoutClubInput!]
+  createMany: ClubInfoChangeAdminRequestCreateManyClubInputEnvelope
+  delete: [ClubInfoChangeAdminRequestWhereUniqueInput!]
+  deleteMany: [ClubInfoChangeAdminRequestScalarWhereInput!]
+  disconnect: [ClubInfoChangeAdminRequestWhereUniqueInput!]
+  set: [ClubInfoChangeAdminRequestWhereUniqueInput!]
+  update: [ClubInfoChangeAdminRequestUpdateWithWhereUniqueWithoutClubInput!]
+  updateMany: [ClubInfoChangeAdminRequestUpdateManyWithWhereWithoutClubInput!]
+  upsert: [ClubInfoChangeAdminRequestUpsertWithWhereUniqueWithoutClubInput!]
+}
+
+input ClubInfoChangeAdminRequestUpdateManyWithoutUserNestedInput {
+  connect: [ClubInfoChangeAdminRequestWhereUniqueInput!]
+  connectOrCreate: [ClubInfoChangeAdminRequestCreateOrConnectWithoutUserInput!]
+  create: [ClubInfoChangeAdminRequestCreateWithoutUserInput!]
+  createMany: ClubInfoChangeAdminRequestCreateManyUserInputEnvelope
+  delete: [ClubInfoChangeAdminRequestWhereUniqueInput!]
+  deleteMany: [ClubInfoChangeAdminRequestScalarWhereInput!]
+  disconnect: [ClubInfoChangeAdminRequestWhereUniqueInput!]
+  set: [ClubInfoChangeAdminRequestWhereUniqueInput!]
+  update: [ClubInfoChangeAdminRequestUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [ClubInfoChangeAdminRequestUpdateManyWithWhereWithoutUserInput!]
+  upsert: [ClubInfoChangeAdminRequestUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input ClubInfoChangeAdminRequestUpdateWithWhereUniqueWithoutClubInput {
+  data: ClubInfoChangeAdminRequestUpdateWithoutClubInput!
+  where: ClubInfoChangeAdminRequestWhereUniqueInput!
+}
+
+input ClubInfoChangeAdminRequestUpdateWithWhereUniqueWithoutUserInput {
+  data: ClubInfoChangeAdminRequestUpdateWithoutUserInput!
+  where: ClubInfoChangeAdminRequestWhereUniqueInput!
+}
+
+input ClubInfoChangeAdminRequestUpdateWithoutClubInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  label: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutClubInfoChangeAdminRequestNestedInput
+}
+
+input ClubInfoChangeAdminRequestUpdateWithoutUserInput {
+  club: ClubInfoChangeRequestUpdateOneRequiredWithoutClubInfoChangeAdminRequestNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  label: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ClubInfoChangeAdminRequestUpsertWithWhereUniqueWithoutClubInput {
+  create: ClubInfoChangeAdminRequestCreateWithoutClubInput!
+  update: ClubInfoChangeAdminRequestUpdateWithoutClubInput!
+  where: ClubInfoChangeAdminRequestWhereUniqueInput!
+}
+
+input ClubInfoChangeAdminRequestUpsertWithWhereUniqueWithoutUserInput {
+  create: ClubInfoChangeAdminRequestCreateWithoutUserInput!
+  update: ClubInfoChangeAdminRequestUpdateWithoutUserInput!
+  where: ClubInfoChangeAdminRequestWhereUniqueInput!
 }
 
 input ClubInfoChangeAdminRequestWhereInput {
@@ -849,6 +1487,160 @@ input ClubInfoChangeRequestRelationFilter {
   isNot: ClubInfoChangeRequestWhereInput
 }
 
+input ClubInfoChangeRequestScalarWhereInput {
+  AND: [ClubInfoChangeRequestScalarWhereInput!]
+  NOT: [ClubInfoChangeRequestScalarWhereInput!]
+  OR: [ClubInfoChangeRequestScalarWhereInput!]
+  changeDescription: StringFilter
+  changeStatus: EnumRequestStatusEnumFilter
+  clubId: StringFilter
+  createdAt: DateTimeFilter
+  description: StringFilter
+  expireDate: DateTimeFilter
+  id: StringFilter
+  jobId: StringNullableFilter
+  name: StringFilter
+  requesterId: StringFilter
+  status: EnumRequestStatusEnumFilter
+  title: StringFilter
+  updatedAt: DateTimeFilter
+}
+
+input ClubInfoChangeRequestUpdateManyMutationInput {
+  changeDescription: StringFieldUpdateOperationsInput
+  changeStatus: EnumRequestStatusEnumFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  expireDate: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  jobId: NullableStringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  status: EnumRequestStatusEnumFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ClubInfoChangeRequestUpdateManyWithWhereWithoutClubInput {
+  data: ClubInfoChangeRequestUpdateManyMutationInput!
+  where: ClubInfoChangeRequestScalarWhereInput!
+}
+
+input ClubInfoChangeRequestUpdateManyWithWhereWithoutRequesterInput {
+  data: ClubInfoChangeRequestUpdateManyMutationInput!
+  where: ClubInfoChangeRequestScalarWhereInput!
+}
+
+input ClubInfoChangeRequestUpdateManyWithoutClubNestedInput {
+  connect: [ClubInfoChangeRequestWhereUniqueInput!]
+  connectOrCreate: [ClubInfoChangeRequestCreateOrConnectWithoutClubInput!]
+  create: [ClubInfoChangeRequestCreateWithoutClubInput!]
+  createMany: ClubInfoChangeRequestCreateManyClubInputEnvelope
+  delete: [ClubInfoChangeRequestWhereUniqueInput!]
+  deleteMany: [ClubInfoChangeRequestScalarWhereInput!]
+  disconnect: [ClubInfoChangeRequestWhereUniqueInput!]
+  set: [ClubInfoChangeRequestWhereUniqueInput!]
+  update: [ClubInfoChangeRequestUpdateWithWhereUniqueWithoutClubInput!]
+  updateMany: [ClubInfoChangeRequestUpdateManyWithWhereWithoutClubInput!]
+  upsert: [ClubInfoChangeRequestUpsertWithWhereUniqueWithoutClubInput!]
+}
+
+input ClubInfoChangeRequestUpdateManyWithoutRequesterNestedInput {
+  connect: [ClubInfoChangeRequestWhereUniqueInput!]
+  connectOrCreate: [ClubInfoChangeRequestCreateOrConnectWithoutRequesterInput!]
+  create: [ClubInfoChangeRequestCreateWithoutRequesterInput!]
+  createMany: ClubInfoChangeRequestCreateManyRequesterInputEnvelope
+  delete: [ClubInfoChangeRequestWhereUniqueInput!]
+  deleteMany: [ClubInfoChangeRequestScalarWhereInput!]
+  disconnect: [ClubInfoChangeRequestWhereUniqueInput!]
+  set: [ClubInfoChangeRequestWhereUniqueInput!]
+  update: [ClubInfoChangeRequestUpdateWithWhereUniqueWithoutRequesterInput!]
+  updateMany: [ClubInfoChangeRequestUpdateManyWithWhereWithoutRequesterInput!]
+  upsert: [ClubInfoChangeRequestUpsertWithWhereUniqueWithoutRequesterInput!]
+}
+
+input ClubInfoChangeRequestUpdateOneRequiredWithoutClubInfoChangeAdminRequestNestedInput {
+  connect: ClubInfoChangeRequestWhereUniqueInput
+  connectOrCreate: ClubInfoChangeRequestCreateOrConnectWithoutClubInfoChangeAdminRequestInput
+  create: ClubInfoChangeRequestCreateWithoutClubInfoChangeAdminRequestInput
+  update: ClubInfoChangeRequestUpdateWithoutClubInfoChangeAdminRequestInput
+  upsert: ClubInfoChangeRequestUpsertWithoutClubInfoChangeAdminRequestInput
+}
+
+input ClubInfoChangeRequestUpdateWithWhereUniqueWithoutClubInput {
+  data: ClubInfoChangeRequestUpdateWithoutClubInput!
+  where: ClubInfoChangeRequestWhereUniqueInput!
+}
+
+input ClubInfoChangeRequestUpdateWithWhereUniqueWithoutRequesterInput {
+  data: ClubInfoChangeRequestUpdateWithoutRequesterInput!
+  where: ClubInfoChangeRequestWhereUniqueInput!
+}
+
+input ClubInfoChangeRequestUpdateWithoutClubInfoChangeAdminRequestInput {
+  changeDescription: StringFieldUpdateOperationsInput
+  changeStatus: EnumRequestStatusEnumFieldUpdateOperationsInput
+  club: ClubUpdateOneRequiredWithoutClubInfoChangeRequestNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  expireDate: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  jobId: NullableStringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  requester: ClubAdminUpdateOneRequiredWithoutClubRequestNestedInput
+  status: EnumRequestStatusEnumFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ClubInfoChangeRequestUpdateWithoutClubInput {
+  changeDescription: StringFieldUpdateOperationsInput
+  changeStatus: EnumRequestStatusEnumFieldUpdateOperationsInput
+  clubInfoChangeAdminRequest: ClubInfoChangeAdminRequestUpdateManyWithoutClubNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  expireDate: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  jobId: NullableStringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  requester: ClubAdminUpdateOneRequiredWithoutClubRequestNestedInput
+  status: EnumRequestStatusEnumFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ClubInfoChangeRequestUpdateWithoutRequesterInput {
+  changeDescription: StringFieldUpdateOperationsInput
+  changeStatus: EnumRequestStatusEnumFieldUpdateOperationsInput
+  club: ClubUpdateOneRequiredWithoutClubInfoChangeRequestNestedInput
+  clubInfoChangeAdminRequest: ClubInfoChangeAdminRequestUpdateManyWithoutClubNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  expireDate: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  jobId: NullableStringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  status: EnumRequestStatusEnumFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ClubInfoChangeRequestUpsertWithWhereUniqueWithoutClubInput {
+  create: ClubInfoChangeRequestCreateWithoutClubInput!
+  update: ClubInfoChangeRequestUpdateWithoutClubInput!
+  where: ClubInfoChangeRequestWhereUniqueInput!
+}
+
+input ClubInfoChangeRequestUpsertWithWhereUniqueWithoutRequesterInput {
+  create: ClubInfoChangeRequestCreateWithoutRequesterInput!
+  update: ClubInfoChangeRequestUpdateWithoutRequesterInput!
+  where: ClubInfoChangeRequestWhereUniqueInput!
+}
+
+input ClubInfoChangeRequestUpsertWithoutClubInfoChangeAdminRequestInput {
+  create: ClubInfoChangeRequestCreateWithoutClubInfoChangeAdminRequestInput!
+  update: ClubInfoChangeRequestUpdateWithoutClubInfoChangeAdminRequestInput!
+}
+
 input ClubInfoChangeRequestWhereInput {
   AND: [ClubInfoChangeRequestWhereInput!]
   NOT: [ClubInfoChangeRequestWhereInput!]
@@ -882,6 +1674,7 @@ type ClubMember {
   createdAt: DateTime!
   deletedAt: DateTime
   id: ID!
+  isAdmin: Boolean!
   status: ClubMemberStatusEnum!
   updatedAt: DateTime!
   user: User!
@@ -892,6 +1685,7 @@ input ClubMemberCreateManyClubInput {
   createdAt: DateTime
   deletedAt: DateTime
   id: String
+  isAdmin: Boolean
   status: ClubMemberStatusEnum!
   updatedAt: DateTime
   userId: String!
@@ -907,6 +1701,7 @@ input ClubMemberCreateManyUserInput {
   createdAt: DateTime
   deletedAt: DateTime
   id: String
+  isAdmin: Boolean
   status: ClubMemberStatusEnum!
   updatedAt: DateTime
 }
@@ -944,6 +1739,7 @@ input ClubMemberCreateWithoutClubInput {
   createdAt: DateTime
   deletedAt: DateTime
   id: String
+  isAdmin: Boolean
   status: ClubMemberStatusEnum!
   updatedAt: DateTime
   user: UserCreateNestedOneWithoutClubMemberInput!
@@ -954,6 +1750,7 @@ input ClubMemberCreateWithoutUserInput {
   createdAt: DateTime
   deletedAt: DateTime
   id: String
+  isAdmin: Boolean
   status: ClubMemberStatusEnum!
   updatedAt: DateTime
 }
@@ -979,11 +1776,151 @@ input ClubMemberOrderByRelationAggregateInput {
   _count: SortOrder
 }
 
+enum ClubMemberOrderByRelevanceFieldEnum {
+  clubId
+  id
+  userId
+}
+
+input ClubMemberOrderByRelevanceInput {
+  fields: [ClubMemberOrderByRelevanceFieldEnum!]!
+  search: String!
+  sort: SortOrder!
+}
+
+input ClubMemberOrderByWithRelationAndSearchRelevanceInput {
+  _relevance: ClubMemberOrderByRelevanceInput
+  club: ClubOrderByWithRelationAndSearchRelevanceInput
+  clubId: SortOrder
+  createdAt: SortOrder
+  deletedAt: SortOrder
+  id: SortOrder
+  isAdmin: SortOrder
+  status: SortOrder
+  updatedAt: SortOrder
+  user: UserOrderByWithRelationAndSearchRelevanceInput
+  userId: SortOrder
+}
+
+enum ClubMemberScalarFieldEnum {
+  clubId
+  createdAt
+  deletedAt
+  id
+  isAdmin
+  status
+  updatedAt
+  userId
+}
+
+input ClubMemberScalarWhereInput {
+  AND: [ClubMemberScalarWhereInput!]
+  NOT: [ClubMemberScalarWhereInput!]
+  OR: [ClubMemberScalarWhereInput!]
+  clubId: StringFilter
+  createdAt: DateTimeFilter
+  deletedAt: DateTimeNullableFilter
+  id: StringFilter
+  isAdmin: BoolFilter
+  status: EnumClubMemberStatusEnumFilter
+  updatedAt: DateTimeFilter
+  userId: StringFilter
+}
+
 enum ClubMemberStatusEnum {
   ACTIVE
   INACTIVE
   LEFT
   PREMIUM
+}
+
+input ClubMemberUpdateManyMutationInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  deletedAt: NullableDateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  isAdmin: BoolFieldUpdateOperationsInput
+  status: EnumClubMemberStatusEnumFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ClubMemberUpdateManyWithWhereWithoutClubInput {
+  data: ClubMemberUpdateManyMutationInput!
+  where: ClubMemberScalarWhereInput!
+}
+
+input ClubMemberUpdateManyWithWhereWithoutUserInput {
+  data: ClubMemberUpdateManyMutationInput!
+  where: ClubMemberScalarWhereInput!
+}
+
+input ClubMemberUpdateManyWithoutClubNestedInput {
+  connect: [ClubMemberWhereUniqueInput!]
+  connectOrCreate: [ClubMemberCreateOrConnectWithoutClubInput!]
+  create: [ClubMemberCreateWithoutClubInput!]
+  createMany: ClubMemberCreateManyClubInputEnvelope
+  delete: [ClubMemberWhereUniqueInput!]
+  deleteMany: [ClubMemberScalarWhereInput!]
+  disconnect: [ClubMemberWhereUniqueInput!]
+  set: [ClubMemberWhereUniqueInput!]
+  update: [ClubMemberUpdateWithWhereUniqueWithoutClubInput!]
+  updateMany: [ClubMemberUpdateManyWithWhereWithoutClubInput!]
+  upsert: [ClubMemberUpsertWithWhereUniqueWithoutClubInput!]
+}
+
+input ClubMemberUpdateManyWithoutUserNestedInput {
+  connect: [ClubMemberWhereUniqueInput!]
+  connectOrCreate: [ClubMemberCreateOrConnectWithoutUserInput!]
+  create: [ClubMemberCreateWithoutUserInput!]
+  createMany: ClubMemberCreateManyUserInputEnvelope
+  delete: [ClubMemberWhereUniqueInput!]
+  deleteMany: [ClubMemberScalarWhereInput!]
+  disconnect: [ClubMemberWhereUniqueInput!]
+  set: [ClubMemberWhereUniqueInput!]
+  update: [ClubMemberUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [ClubMemberUpdateManyWithWhereWithoutUserInput!]
+  upsert: [ClubMemberUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input ClubMemberUpdateWithWhereUniqueWithoutClubInput {
+  data: ClubMemberUpdateWithoutClubInput!
+  where: ClubMemberWhereUniqueInput!
+}
+
+input ClubMemberUpdateWithWhereUniqueWithoutUserInput {
+  data: ClubMemberUpdateWithoutUserInput!
+  where: ClubMemberWhereUniqueInput!
+}
+
+input ClubMemberUpdateWithoutClubInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  deletedAt: NullableDateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  isAdmin: BoolFieldUpdateOperationsInput
+  status: EnumClubMemberStatusEnumFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutClubMemberNestedInput
+}
+
+input ClubMemberUpdateWithoutUserInput {
+  club: ClubUpdateOneRequiredWithoutClubMemberNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  deletedAt: NullableDateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  isAdmin: BoolFieldUpdateOperationsInput
+  status: EnumClubMemberStatusEnumFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ClubMemberUpsertWithWhereUniqueWithoutClubInput {
+  create: ClubMemberCreateWithoutClubInput!
+  update: ClubMemberUpdateWithoutClubInput!
+  where: ClubMemberWhereUniqueInput!
+}
+
+input ClubMemberUpsertWithWhereUniqueWithoutUserInput {
+  create: ClubMemberCreateWithoutUserInput!
+  update: ClubMemberUpdateWithoutUserInput!
+  where: ClubMemberWhereUniqueInput!
 }
 
 input ClubMemberUserIdClubIdCompoundUniqueInput {
@@ -1000,6 +1937,7 @@ input ClubMemberWhereInput {
   createdAt: DateTimeFilter
   deletedAt: DateTimeNullableFilter
   id: StringFilter
+  isAdmin: BoolFilter
   status: EnumClubMemberStatusEnumFilter
   updatedAt: DateTimeFilter
   user: UserRelationFilter
@@ -1067,6 +2005,118 @@ enum ClubStatusEnum {
   INVALIDATED
 }
 
+input ClubUpdateOneRequiredWithoutClubAdminNestedInput {
+  connect: ClubWhereUniqueInput
+  connectOrCreate: ClubCreateOrConnectWithoutClubAdminInput
+  create: ClubCreateWithoutClubAdminInput
+  update: ClubUpdateWithoutClubAdminInput
+  upsert: ClubUpsertWithoutClubAdminInput
+}
+
+input ClubUpdateOneRequiredWithoutClubEventNestedInput {
+  connect: ClubWhereUniqueInput
+  connectOrCreate: ClubCreateOrConnectWithoutClubEventInput
+  create: ClubCreateWithoutClubEventInput
+  update: ClubUpdateWithoutClubEventInput
+  upsert: ClubUpsertWithoutClubEventInput
+}
+
+input ClubUpdateOneRequiredWithoutClubInfoChangeRequestNestedInput {
+  connect: ClubWhereUniqueInput
+  connectOrCreate: ClubCreateOrConnectWithoutClubInfoChangeRequestInput
+  create: ClubCreateWithoutClubInfoChangeRequestInput
+  update: ClubUpdateWithoutClubInfoChangeRequestInput
+  upsert: ClubUpsertWithoutClubInfoChangeRequestInput
+}
+
+input ClubUpdateOneRequiredWithoutClubMemberNestedInput {
+  connect: ClubWhereUniqueInput
+  connectOrCreate: ClubCreateOrConnectWithoutClubMemberInput
+  create: ClubCreateWithoutClubMemberInput
+  update: ClubUpdateWithoutClubMemberInput
+  upsert: ClubUpsertWithoutClubMemberInput
+}
+
+input ClubUpdateWithoutClubAdminInput {
+  clubEvent: ClubEventUpdateManyWithoutClubNestedInput
+  clubInfoChangeRequest: ClubInfoChangeRequestUpdateManyWithoutClubNestedInput
+  clubMember: ClubMemberUpdateManyWithoutClubNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  label: StringFieldUpdateOperationsInput
+  logo: NullableStringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  status: EnumClubStatusEnumFieldUpdateOperationsInput
+  thumbnail: NullableStringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ClubUpdateWithoutClubEventInput {
+  clubAdmin: ClubAdminUpdateManyWithoutClubNestedInput
+  clubInfoChangeRequest: ClubInfoChangeRequestUpdateManyWithoutClubNestedInput
+  clubMember: ClubMemberUpdateManyWithoutClubNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  label: StringFieldUpdateOperationsInput
+  logo: NullableStringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  status: EnumClubStatusEnumFieldUpdateOperationsInput
+  thumbnail: NullableStringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ClubUpdateWithoutClubInfoChangeRequestInput {
+  clubAdmin: ClubAdminUpdateManyWithoutClubNestedInput
+  clubEvent: ClubEventUpdateManyWithoutClubNestedInput
+  clubMember: ClubMemberUpdateManyWithoutClubNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  label: StringFieldUpdateOperationsInput
+  logo: NullableStringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  status: EnumClubStatusEnumFieldUpdateOperationsInput
+  thumbnail: NullableStringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ClubUpdateWithoutClubMemberInput {
+  clubAdmin: ClubAdminUpdateManyWithoutClubNestedInput
+  clubEvent: ClubEventUpdateManyWithoutClubNestedInput
+  clubInfoChangeRequest: ClubInfoChangeRequestUpdateManyWithoutClubNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  label: StringFieldUpdateOperationsInput
+  logo: NullableStringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  status: EnumClubStatusEnumFieldUpdateOperationsInput
+  thumbnail: NullableStringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ClubUpsertWithoutClubAdminInput {
+  create: ClubCreateWithoutClubAdminInput!
+  update: ClubUpdateWithoutClubAdminInput!
+}
+
+input ClubUpsertWithoutClubEventInput {
+  create: ClubCreateWithoutClubEventInput!
+  update: ClubUpdateWithoutClubEventInput!
+}
+
+input ClubUpsertWithoutClubInfoChangeRequestInput {
+  create: ClubCreateWithoutClubInfoChangeRequestInput!
+  update: ClubUpdateWithoutClubInfoChangeRequestInput!
+}
+
+input ClubUpsertWithoutClubMemberInput {
+  create: ClubCreateWithoutClubMemberInput!
+  update: ClubUpdateWithoutClubMemberInput!
+}
+
 input ClubWhereInput {
   AND: [ClubWhereInput!]
   NOT: [ClubWhereInput!]
@@ -1097,6 +2147,10 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+input DateTimeFieldUpdateOperationsInput {
+  set: DateTime
+}
+
 input DateTimeFilter {
   equals: DateTime
   gt: DateTime
@@ -1119,11 +2173,19 @@ input DateTimeNullableFilter {
   notIn: [DateTime!]
 }
 
+input EnumClubAdminRoleEnumFieldUpdateOperationsInput {
+  set: ClubAdminRoleEnum
+}
+
 input EnumClubAdminRoleEnumFilter {
   equals: ClubAdminRoleEnum
   in: [ClubAdminRoleEnum!]
   not: NestedEnumClubAdminRoleEnumFilter
   notIn: [ClubAdminRoleEnum!]
+}
+
+input EnumClubAdminStatusEnumFieldUpdateOperationsInput {
+  set: ClubAdminStatusEnum
 }
 
 input EnumClubAdminStatusEnumFilter {
@@ -1133,11 +2195,19 @@ input EnumClubAdminStatusEnumFilter {
   notIn: [ClubAdminStatusEnum!]
 }
 
+input EnumClubEventStatusEnumFieldUpdateOperationsInput {
+  set: clubEventStatusEnum
+}
+
 input EnumClubEventStatusEnumFilter {
-  equals: ClubEventStatusEnum
-  in: [ClubEventStatusEnum!]
+  equals: clubEventStatusEnum
+  in: [clubEventStatusEnum!]
   not: NestedEnumClubEventStatusEnumFilter
-  notIn: [ClubEventStatusEnum!]
+  notIn: [clubEventStatusEnum!]
+}
+
+input EnumClubMemberEventAttendanceEnumFieldUpdateOperationsInput {
+  set: ClubMemberEventAttendanceEnum
 }
 
 input EnumClubMemberEventAttendanceEnumFilter {
@@ -1147,11 +2217,19 @@ input EnumClubMemberEventAttendanceEnumFilter {
   notIn: [ClubMemberEventAttendanceEnum!]
 }
 
+input EnumClubMemberEventStatusEnumFieldUpdateOperationsInput {
+  set: ClubMemberEventStatusEnum
+}
+
 input EnumClubMemberEventStatusEnumFilter {
   equals: ClubMemberEventStatusEnum
   in: [ClubMemberEventStatusEnum!]
   not: NestedEnumClubMemberEventStatusEnumFilter
   notIn: [ClubMemberEventStatusEnum!]
+}
+
+input EnumClubMemberStatusEnumFieldUpdateOperationsInput {
+  set: ClubMemberStatusEnum
 }
 
 input EnumClubMemberStatusEnumFilter {
@@ -1161,6 +2239,10 @@ input EnumClubMemberStatusEnumFilter {
   notIn: [ClubMemberStatusEnum!]
 }
 
+input EnumClubStatusEnumFieldUpdateOperationsInput {
+  set: ClubStatusEnum
+}
+
 input EnumClubStatusEnumFilter {
   equals: ClubStatusEnum
   in: [ClubStatusEnum!]
@@ -1168,11 +2250,19 @@ input EnumClubStatusEnumFilter {
   notIn: [ClubStatusEnum!]
 }
 
+input EnumRequestStatusEnumFieldUpdateOperationsInput {
+  set: requestStatusEnum
+}
+
 input EnumRequestStatusEnumFilter {
   equals: requestStatusEnum
   in: [requestStatusEnum!]
   not: NestedEnumRequestStatusEnumFilter
   notIn: [requestStatusEnum!]
+}
+
+input EnumStudentStatusEnumFieldUpdateOperationsInput {
+  set: StudentStatusEnum
 }
 
 input EnumStudentStatusEnumFilter {
@@ -1188,12 +2278,21 @@ input LoginInput {
 }
 
 type Mutation {
+  createClubEvent(data: ClubEventCreateInput!): ClubEvent!
   createClubInfoChangeRequest(data: ClubInfoChangeRequestCreateInput!): ClubInfoChangeRequest!
   createOneClub(data: ClubCreateInput!): Club!
+  joinClub(clubId: String!): ClubMember
+  joinEvent(eventId: String!): ClubEventMember!
+  leaveClub(clubId: String!): ClubMember
+  leaveEvent(eventId: String!): ClubEventMember!
   loginClubAdmin(data: LoginInput!): Token!
   loginSuperAdmin(data: LoginInput!): Token!
   loginUser(data: LoginInput!): Token!
+  refreshToken(refreshToken: String!): String!
+  updateClubEvent(data: ClubEventUpdateInput!, where: ClubEventWhereUniqueInput!): ClubEvent!
+  updateClubEventStatus(eventId: String!, status: clubEventStatusEnum!): ClubEvent!
   updateClubInfoChangeRequestStatus(data: UpdateInfoChangeRequestStatusInput!): ClubInfoChangeRequest!
+  updateEventAttendance(attendance: clubMemberEventAttendanceEnum!, memberId: String!): ClubEventMember!
   userSignUp(data: UserSignUpInput!): Token!
 }
 
@@ -1239,10 +2338,10 @@ input NestedEnumClubAdminStatusEnumFilter {
 }
 
 input NestedEnumClubEventStatusEnumFilter {
-  equals: ClubEventStatusEnum
-  in: [ClubEventStatusEnum!]
+  equals: clubEventStatusEnum
+  in: [clubEventStatusEnum!]
   not: NestedEnumClubEventStatusEnumFilter
-  notIn: [ClubEventStatusEnum!]
+  notIn: [clubEventStatusEnum!]
 }
 
 input NestedEnumClubMemberEventAttendanceEnumFilter {
@@ -1317,14 +2416,35 @@ input NestedStringNullableFilter {
   startsWith: String
 }
 
+input NullableDateTimeFieldUpdateOperationsInput {
+  set: DateTime
+}
+
+input NullableStringFieldUpdateOperationsInput {
+  set: String
+}
+
 type Query {
+  checkJobs: Boolean!
   clubTotalCount: Int!
+  countTotalClubEvent: Int!
+  countTotalClubMember(clubId: String!): Int!
+  countTotalEventMember(eventId: String!): Int!
   findManyClub(cursor: ClubWhereUniqueInput, distinct: [ClubScalarFieldEnum!], orderBy: [ClubOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: ClubWhereInput): [Club!]!
+  findManyClubAdmin(cursor: ClubAdminWhereUniqueInput, distinct: [ClubAdminScalarFieldEnum!], orderBy: [ClubAdminOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: ClubAdminWhereInput): [ClubAdmin!]!
+  findManyClubEvent(cursor: ClubEventWhereUniqueInput, distinct: [ClubEventScalarFieldEnum!], orderBy: [ClubEventOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: ClubEventWhereInput): [ClubEvent!]!
+  findManyClubMember(cursor: ClubMemberWhereUniqueInput, distinct: [ClubMemberScalarFieldEnum!], orderBy: [ClubMemberOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: ClubMemberWhereInput): [ClubMember!]!
+  findManyEventMember(cursor: ClubEventMemberWhereUniqueInput, distinct: [ClubEventMemberScalarFieldEnum!], orderBy: [ClubEventMemberOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: ClubEventMemberWhereInput): [ClubEventMember!]!
   findManyUser(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: UserWhereInput): [User!]!
   findOneClub(cursor: ClubWhereUniqueInput, distinct: [ClubScalarFieldEnum!], orderBy: [ClubOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: ClubWhereInput): Club!
+  findOneClubEvent(cursor: ClubEventWhereUniqueInput, distinct: [ClubEventScalarFieldEnum!], orderBy: [ClubEventOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: ClubEventWhereInput): ClubEvent!
   findOneUser(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: UserWhereInput): User!
   getClubsByAdmin: [Club!]!
   getMe: User!
+  getMeEventMember(eventId: String!): ClubEventMember
+  getMeMember(clubId: String!): ClubMember
+  getMyClubs: [ClubMember!]
+  getMyEvents: [ClubEventMember!]
 }
 
 enum QueryMode {
@@ -1335,6 +2455,10 @@ enum QueryMode {
 enum SortOrder {
   asc
   desc
+}
+
+input StringFieldUpdateOperationsInput {
+  set: String
 }
 
 input StringFilter {
@@ -1570,6 +2694,118 @@ input UserSignUpInput {
   username: String!
 }
 
+input UserUpdateOneRequiredWithoutClubAdminNestedInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutClubAdminInput
+  create: UserCreateWithoutClubAdminInput
+  update: UserUpdateWithoutClubAdminInput
+  upsert: UserUpsertWithoutClubAdminInput
+}
+
+input UserUpdateOneRequiredWithoutClubEventMemberNestedInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutClubEventMemberInput
+  create: UserCreateWithoutClubEventMemberInput
+  update: UserUpdateWithoutClubEventMemberInput
+  upsert: UserUpsertWithoutClubEventMemberInput
+}
+
+input UserUpdateOneRequiredWithoutClubInfoChangeAdminRequestNestedInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutClubInfoChangeAdminRequestInput
+  create: UserCreateWithoutClubInfoChangeAdminRequestInput
+  update: UserUpdateWithoutClubInfoChangeAdminRequestInput
+  upsert: UserUpsertWithoutClubInfoChangeAdminRequestInput
+}
+
+input UserUpdateOneRequiredWithoutClubMemberNestedInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutClubMemberInput
+  create: UserCreateWithoutClubMemberInput
+  update: UserUpdateWithoutClubMemberInput
+  upsert: UserUpsertWithoutClubMemberInput
+}
+
+input UserUpdateWithoutClubAdminInput {
+  clubEventMember: ClubEventMemberUpdateManyWithoutUserNestedInput
+  clubInfoChangeAdminRequest: ClubInfoChangeAdminRequestUpdateManyWithoutUserNestedInput
+  clubMember: ClubMemberUpdateManyWithoutUserNestedInput
+  contactNumber: NullableStringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  status: EnumStudentStatusEnumFieldUpdateOperationsInput
+  tpNumber: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  username: StringFieldUpdateOperationsInput
+}
+
+input UserUpdateWithoutClubEventMemberInput {
+  clubAdmin: ClubAdminUpdateManyWithoutUserNestedInput
+  clubInfoChangeAdminRequest: ClubInfoChangeAdminRequestUpdateManyWithoutUserNestedInput
+  clubMember: ClubMemberUpdateManyWithoutUserNestedInput
+  contactNumber: NullableStringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  status: EnumStudentStatusEnumFieldUpdateOperationsInput
+  tpNumber: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  username: StringFieldUpdateOperationsInput
+}
+
+input UserUpdateWithoutClubInfoChangeAdminRequestInput {
+  clubAdmin: ClubAdminUpdateManyWithoutUserNestedInput
+  clubEventMember: ClubEventMemberUpdateManyWithoutUserNestedInput
+  clubMember: ClubMemberUpdateManyWithoutUserNestedInput
+  contactNumber: NullableStringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  status: EnumStudentStatusEnumFieldUpdateOperationsInput
+  tpNumber: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  username: StringFieldUpdateOperationsInput
+}
+
+input UserUpdateWithoutClubMemberInput {
+  clubAdmin: ClubAdminUpdateManyWithoutUserNestedInput
+  clubEventMember: ClubEventMemberUpdateManyWithoutUserNestedInput
+  clubInfoChangeAdminRequest: ClubInfoChangeAdminRequestUpdateManyWithoutUserNestedInput
+  contactNumber: NullableStringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  status: EnumStudentStatusEnumFieldUpdateOperationsInput
+  tpNumber: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  username: StringFieldUpdateOperationsInput
+}
+
+input UserUpsertWithoutClubAdminInput {
+  create: UserCreateWithoutClubAdminInput!
+  update: UserUpdateWithoutClubAdminInput!
+}
+
+input UserUpsertWithoutClubEventMemberInput {
+  create: UserCreateWithoutClubEventMemberInput!
+  update: UserUpdateWithoutClubEventMemberInput!
+}
+
+input UserUpsertWithoutClubInfoChangeAdminRequestInput {
+  create: UserCreateWithoutClubInfoChangeAdminRequestInput!
+  update: UserUpdateWithoutClubInfoChangeAdminRequestInput!
+}
+
+input UserUpsertWithoutClubMemberInput {
+  create: UserCreateWithoutClubMemberInput!
+  update: UserUpdateWithoutClubMemberInput!
+}
+
 input UserWhereInput {
   AND: [UserWhereInput!]
   NOT: [UserWhereInput!]
@@ -1595,6 +2831,20 @@ input UserWhereUniqueInput {
   id: String
   tpNumber: String
   username: String
+}
+
+enum clubEventStatusEnum {
+  AWAITING
+  CANCELLED
+  FINISHED
+  IN_REVIEW
+  ONGOING
+}
+
+enum clubMemberEventAttendanceEnum {
+  ABSENT
+  LEAVE
+  PRESENT
 }
 
 enum requestStatusEnum {

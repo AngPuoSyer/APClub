@@ -18,6 +18,7 @@ export default defineNuxtConfig({
     "primevue/resources/primevue.css",
     "primeicons/primeicons.css",
     "primevue/resources/themes/lara-light-blue/theme.css",
+    "md-editor-v3/lib/style.css",
   ],
   build: {
     transpile: ["primevue"],

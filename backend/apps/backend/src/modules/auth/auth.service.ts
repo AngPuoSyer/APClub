@@ -170,13 +170,9 @@ export class AuthService {
           secret: this.configService.get('JWT_REFRESH_SECRET'),
         },
       );
-      return this.generateTokens({
-        userId,
-        role,
-        status,
-      });
+      return this.generateAccessToken(userId, role, status);
     } catch (e) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException('Invalid Token');
     }
   }
 

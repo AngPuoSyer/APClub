@@ -23,6 +23,13 @@ export class AuthResolver {
     return this.authService.signUpUser(data, select);
   }
 
+  @Mutation(() => String)
+  async refreshToken(
+    @Args('refreshToken', { type: () => String }) refreshToken,
+  ) {
+    return this.authService.refreshToken(refreshToken);
+  }
+
   @Mutation(() => Token)
   async loginUser(@Args('data') { email, password }: LoginInput) {
     return this.authService.loginUser(email, password);

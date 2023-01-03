@@ -1488,6 +1488,11 @@
     estree-walker "^2.0.2"
     picomatch "^2.3.1"
 
+"@tailwindcss/line-clamp@^0.4.2":
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/@tailwindcss/line-clamp/-/line-clamp-0.4.2.tgz#f353c5a8ab2c939c6267ac5b907f012e5ee130f9"
+  integrity sha512-HFzAQuqYCjyy/SX9sLGB1lroPzmcnWv1FHkIpmypte10hptf4oPUfucryMKovZh2u0uiS9U5Ty3GghWfEJGwVw==
+
 "@tootallnate/once@2":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@tootallnate/once/-/once-2.0.0.tgz#f544a148d3ab35801c1f633a7441fd87c2e484bf"
@@ -1549,6 +1554,11 @@
   version "4.14.190"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.190.tgz#d8e99647af141c63902d0ca53cf2b34d2df33545"
   integrity sha512-5iJ3FBJBvQHQ8sFhEhJfjUP+G+LalhavTkYyrAYqz5MEJG+erSv0k9KJLb6q7++17Lafk1scaTIFXcMJlwK8Mw==
+
+"@types/marked@^4.0.8":
+  version "4.0.8"
+  resolved "https://registry.yarnpkg.com/@types/marked/-/marked-4.0.8.tgz#b316887ab3499d0a8f4c70b7bd8508f92d477955"
+  integrity sha512-HVNzMT5QlWCOdeuBsgXP8EZzKUf0+AXzN+sLmjvaB3ZlLqO+e4u0uXrdw9ub69wBKFs+c6/pA4r9sy6cCDvImw==
 
 "@types/node@*":
   version "18.11.9"
@@ -1634,6 +1644,11 @@
   dependencies:
     "@urql/core" "^3.0.0"
     wonka "^6.0.0"
+
+"@vavt/md-editor-extension@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@vavt/md-editor-extension/-/md-editor-extension-1.4.0.tgz#89c8aa25f73b7b73fe833523784aad4eea4a909e"
+  integrity sha512-PdTqrMPvATk31vF4ipxgGqXXi+kFd+lXlDsHdc+mS+DOCycd5EHSjcTm10evE1I7xSkk7yuIq8AcfYh/ukPIjA==
 
 "@vercel/nft@^0.22.1":
   version "0.22.1"
@@ -5014,6 +5029,16 @@ map-cache@^0.2.0:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/map-cache/-/map-cache-0.2.2.tgz#c32abd0bd6525d9b051645bb4f26ac5dc98a0dbf"
   integrity sha512-8y/eV9QQZCiyn1SprXSrCmqJN0yNRATe+PO8ztwqrvrbdRLA3eYJF0yaR0YayLWkMbsQSKWS9N2gPcGEc4UsZg==
+
+marked@^4.2.4:
+  version "4.2.4"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-4.2.4.tgz#5a4ce6c7a1ae0c952601fce46376ee4cf1797e1c"
+  integrity sha512-Wcc9ikX7Q5E4BYDPvh1C6QNSxrjC9tBgz+A/vAhp59KXUgachw++uMvMKiSW8oA85nopmPZcEvBoex/YLMsiyA==
+
+md-editor-v3@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/md-editor-v3/-/md-editor-v3-2.5.0.tgz#83872774ad4ef38863fa3a72b7a3b0897f3bed77"
+  integrity sha512-qB6w4jQU7uItAcJYuG/JaFVLDWZ2NgegLsCHNeQV5R1CgMC8MKJYcFxMpCDf8YNRMrN9zK0Kd+grYp1rq4KhNw==
 
 mdn-data@2.0.14:
   version "2.0.14"

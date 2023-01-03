@@ -7,7 +7,7 @@ import { FindManyClubArgs } from '@generated/club/find-many-club.args';
 import { Injectable } from '@nestjs/common';
 import { Args, Info, Mutation, Query } from '@nestjs/graphql';
 import { PrismaSelect } from '@paljs/plugins';
-import { ClubAdminStatusEnum } from '@prisma/client';
+import { ClubAdminStatusEnum, ClubMemberStatusEnum } from '@prisma/client';
 import { RoleGuard } from '../auth/decorator/roles.decorator';
 import { TokenPayload } from '../auth/dto/token-payload.dto';
 import { ClubService } from './club.service';
@@ -22,7 +22,6 @@ export class ClubResolver {
     return this.clubService.findOne({ ...findOneClubInput, ...select });
   }
 
-  // TODO: pagination
   @Query(() => [Club])
   async findManyClub(
     @Args() findManyClubInput: FindManyClubArgs,
@@ -39,8 +38,9 @@ export class ClubResolver {
 
   @RoleGuard(UserRoleEnum.CLUB_ADMIN)
   @Query(() => [Club])
-  getClubsByAdmin(@GetUser() user: TokenPayload) {
+  getClubsByAdmin(@GetUser() user: TokenPayload, @Info() info) {
     return this.clubService.findMany({
+      ...new PrismaSelect(info).value,
       where: {
         clubAdmin: {
           some: {

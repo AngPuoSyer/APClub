@@ -19,6 +19,9 @@ import Textarea from "primevue/textarea";
 import Dropdown from "primevue/dropdown";
 import AutoComplete from "primevue/autocomplete";
 import Skeleton from "primevue/skeleton";
+import TabPanel from "primevue/tabpanel";
+import TabView from "primevue/tabview";
+import OrganizationChart from "primevue/organizationchart";
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(PrimeVue, { ripple: true });
@@ -42,6 +45,9 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component("Dropdown", Dropdown);
   nuxtApp.vueApp.component("AutoComplete", AutoComplete);
   nuxtApp.vueApp.component("Skeleton", Skeleton);
+  nuxtApp.vueApp.component("TabPanel", TabPanel);
+  nuxtApp.vueApp.component("TabView", TabView);
+  nuxtApp.vueApp.component("OrganizationChart", OrganizationChart);
 
   nuxtApp.vueApp.directive("Tooltip", Tooltip);
 

@@ -4,7 +4,7 @@
 @tailwind variants;
 
 .container {
-  @apply overflow-scroll ml-10 mt-4 h-[95vh] mr-6 !important;
+  @apply overflow-scroll ml-10 mt-8 h-[95vh] mr-6 !important;
 }
 
 .container-heading {
@@ -14,3 +14,7 @@
 .container-sub {
   @apply text-xl text-gray-500;
 }
+
+/* h3 {
+  @apply text-xl font-semibold !important;
+} */

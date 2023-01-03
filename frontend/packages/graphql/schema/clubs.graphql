@@ -18,6 +18,26 @@ query findManyClub(
   }
 }
 
+query findOneClub(
+  $cursor: ClubWhereUniqueInput
+  $distinct: [ClubScalarFieldEnum!]
+  $orderBy: [ClubOrderByWithRelationAndSearchRelevanceInput!]
+  $skip: Int
+  $take: Int
+  $where: ClubWhereInput
+) {
+  findOneClub(
+    cursor: $cursor
+    distinct: $distinct
+    orderBy: $orderBy
+    skip: $skip
+    take: $take
+    where: $where
+  ) {
+    ...ClubField
+  }
+}
+
 query clubTotalCount {
   clubTotalCount
 }

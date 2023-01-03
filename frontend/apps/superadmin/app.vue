@@ -1,30 +1,49 @@
 <template>
   <NuxtLayout>
-    <NuxtPage/>
+    <NuxtPage />
   </NuxtLayout>
 </template>
 
 <script setup lang="ts">
-import { createClient, provideClient } from '@urql/vue';
-import { useAuthStore } from './store/auth.store';
+import {
+  RefreshTokenDocument,
+  RefreshTokenMutation,
+  RefreshTokenMutationVariables,
+  useRefreshTokenMutation,
+} from "@apclub/graphql";
+import { createClient, provideClient } from "@urql/vue";
+import { useAuthStore } from "./store/auth.store";
 
-const authStore = useAuthStore()
+const authStore = useAuthStore();
+
 const client = createClient({
-  url: 'http://localhost:8000/graphql',
-  fetchOptions: () => {
-    return {
-      headers: { Authorization: `Bearer ${authStore.accessToken}`},
-    };
-  },
+    url: "http://localhost:8000/graphql",
+    fetchOptions: () => {
+      return {
+        headers: { Authorization: `Bearer ${authStore.accessToken}` },
+      };
+    },
+  });
+  provideClient(client);
+
+onMounted(async () => {
+
+
+  document.addEventListener("beforeunload", () => {
+    if (!authStore.rememberMe) authStore.logout();
+  });
+  if (authStore.refreshToken) {
+    const { data, error } = await client
+      .mutation<RefreshTokenMutation, RefreshTokenMutationVariables>(
+        RefreshTokenDocument,
+        { token: authStore.refreshToken }
+      )
+      .toPromise();
+    if (!error) authStore.setAccessToken(data?.refreshToken ?? "");
+    // if (error || !data?.refreshToken) navigateTo("/login");
+  }
+  if (!authStore.isLoggedIn) navigateTo("/login");
 });
-provideClient(client)
-
-onMounted(() => {
-  document.addEventListener('beforeunload', () => {
-    if(!authStore.rememberMe) authStore.logout()
-  })
-
-})
 </script>
 
 <style>

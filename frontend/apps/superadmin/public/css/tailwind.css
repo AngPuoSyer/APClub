@@ -14,3 +14,7 @@
 .container-sub {
   @apply text-xl text-gray-500;
 }
+
+h3 {
+  @apply text-xl font-semibold !important;
+}

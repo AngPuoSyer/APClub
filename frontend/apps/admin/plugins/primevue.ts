@@ -19,10 +19,19 @@ import Tooltip from "primevue/tooltip";
 import Textarea from "primevue/textarea";
 import Dropdown from "primevue/dropdown";
 import AutoComplete from "primevue/autocomplete";
+import TabView from "primevue/tabview";
+import TabPanel from "primevue/tabpanel";
+import Skeleton from "primevue/skeleton";
+import OrganizationChart from "primevue/organizationchart";
+import Calendar from "primevue/calendar";
+import InputSwitch from "primevue/inputswitch";
+import DynamicDialog from "primevue/dynamicdialog";
+import DialogService from "primevue/dialogservice";
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(PrimeVue, { ripple: true });
   nuxtApp.vueApp.use(ToastService);
+  nuxtApp.vueApp.use(DialogService);
 
   nuxtApp.vueApp.component("Button", Button);
   nuxtApp.vueApp.component("Toast", Toast);
@@ -41,6 +50,13 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component("Textarea", Textarea);
   nuxtApp.vueApp.component("Dropdown", Dropdown);
   nuxtApp.vueApp.component("AutoComplete", AutoComplete);
+  nuxtApp.vueApp.component("TabView", TabView);
+  nuxtApp.vueApp.component("TabPanel", TabPanel);
+  nuxtApp.vueApp.component("OrganizationChart", OrganizationChart);
+  nuxtApp.vueApp.component("Calendar", Calendar);
+  nuxtApp.vueApp.component("InputSwitch", InputSwitch);
+  nuxtApp.vueApp.component("Skeleton", Skeleton);
+  nuxtApp.vueApp.component("DynamicDialog", DynamicDialog);
 
   nuxtApp.vueApp.directive("Tooltip", Tooltip);
 

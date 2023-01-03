@@ -32,13 +32,12 @@ export class UserResolver {
 
   @RoleGuard(UserRoleEnum.CLUB_ADMIN, UserRoleEnum.MEMBER)
   @Query(() => User)
-  getMe(@GetUser() user: TokenPayload) {
-    {
-      this.userService.findOneUser({
-        where: {
-          id: user.userId,
-        },
-      });
-    }
+  getMe(@GetUser() user: TokenPayload, @Info() info) {
+    return this.userService.findOneUser({
+      ...new PrismaSelect(info).value,
+      where: {
+        id: user.userId,
+      },
+    });
   }
 }

@@ -6,6 +6,7 @@ import { RmqModule } from '@app/common/rmq/rmq.module';
 import { APClubServices } from '@app/common/serivce/channels.enum';
 import { RedisConfig } from '@app/common/config/config.interface';
 import { InfoChangeQueueModule } from './modules/info-change-queue/info-change-queue.module';
+import { EventQueueModule } from './modules/event-queue/event-queue.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { InfoChangeQueueModule } from './modules/info-change-queue/info-change-q
       inject: [ConfigService],
     }),
     InfoChangeQueueModule,
+    EventQueueModule,
   ],
   controllers: [],
   providers: [],

@@ -16,7 +16,7 @@
         <div class="w-full p-fluid">
           <span class="p-float-label">
             <InputText id="username" type="text" v-model="email" />
-            <label for="username">Username</label>
+            <label for="username">Email</label>
           </span>
         </div>
         <div class="w-full p-fluid mt-8">
@@ -29,7 +29,7 @@
             <label for="password">Password</label>
           </span>
         </div>
-        <Button type="submit" class="mt-4 w-full p-button-sm" label="Sign in" />
+        <Button type="submit" class="mt-4 w-full p-button-sm p-button-raised" label="Sign in" />
       </div>
       <div class="mt-3 flex items-center">
         <Checkbox

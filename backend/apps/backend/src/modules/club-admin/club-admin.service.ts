@@ -9,4 +9,8 @@ export class ClubAdminService {
   findOne(data: Prisma.ClubAdminFindFirstArgs) {
     return this.prismaService.clubAdmin.findFirst(data);
   }
+
+  findMany(data: Prisma.ClubAdminFindManyArgs) {
+    return this.prismaService.clubAdmin.findMany(data);
+  }
 }

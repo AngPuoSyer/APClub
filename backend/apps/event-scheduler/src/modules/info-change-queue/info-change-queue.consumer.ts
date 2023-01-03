@@ -5,15 +5,8 @@ import {
 } from '@app/common/queue/queue.enum';
 import { APClubServices } from '@app/common/serivce/channels.enum';
 import { AppEventService } from '@app/common/serivce/service.enum';
-import {
-  InjectQueue,
-  OnQueueError,
-  OnQueueWaiting,
-  Process,
-  Processor,
-} from '@nestjs/bull';
+import { InjectQueue } from '@nestjs/bull';
 import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
-import { ModuleRef } from '@nestjs/core';
 import { ClientProxy } from '@nestjs/microservices';
 import { Job, Queue } from 'bull';
 
@@ -37,15 +30,5 @@ export class InfoChangeQueueConsumer implements OnModuleInit {
       AppEventService.INFO_CHANGE_DONE,
       new InfoChangeRequestConfirmEvent(job.data.requestId),
     );
-  }
-
-  @OnQueueWaiting()
-  jobWaitingHandler(jobId: string | number) {
-    console.log(jobId, 'is waiting');
-  }
-
-  @OnQueueError()
-  errorTest(e) {
-    console.log(e);
   }
 }

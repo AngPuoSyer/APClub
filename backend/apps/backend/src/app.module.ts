@@ -14,6 +14,8 @@ import { ClubInfoChangeRequestModule } from './modules/club-request/club-info-ch
 import { RmqModule } from '@app/common/rmq/rmq.module';
 import { APClubServices } from '@app/common/serivce/channels.enum';
 import { ClubEventModule } from './modules/club-event/club-event.module';
+import { ClubMemberModule } from './modules/club-member/club-member.module';
+import { EventMemberModule } from './modules/event-member/event-member.module';
 
 @Module({
   imports: [
@@ -59,6 +61,8 @@ import { ClubEventModule } from './modules/club-event/club-event.module';
     ClubModule,
     ClubInfoChangeRequestModule,
     ClubEventModule,
+    ClubMemberModule,
+    EventMemberModule,
   ],
 })
 export class AppModule {}

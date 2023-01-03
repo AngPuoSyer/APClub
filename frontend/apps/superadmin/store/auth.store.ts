@@ -5,6 +5,7 @@ export const useAuthStore = defineStore(StoreType.AUTH, {
   state: () => ({
     accessToken: "",
     rememberMe: false,
+    refreshToken: "",
   }),
   persist: true,
   getters: {
@@ -22,6 +23,10 @@ export const useAuthStore = defineStore(StoreType.AUTH, {
     logout() {
       this.accessToken = "";
       this.rememberMe = false;
+      this.refreshToken = "";
+    },
+    setRefreshToken(refreshToken: string) {
+      this.refreshToken = refreshToken;
     },
   },
 });

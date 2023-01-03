@@ -1,0 +1,97 @@
+query countTotalClubEvent {
+  countTotalClubEvent
+}
+
+query findManyClubEvent(
+  $cursor: ClubEventWhereUniqueInput
+  $distinct: [ClubEventScalarFieldEnum!]
+  $orderBy: [ClubEventOrderByWithRelationAndSearchRelevanceInput!]
+  $skip: Int
+  $take: Int
+  $where: ClubEventWhereInput
+) {
+  findManyClubEvent(
+    cursor: $cursor
+    distinct: $distinct
+    orderBy: $orderBy
+    skip: $skip
+    take: $take
+    where: $where
+  ) {
+    ...ClubEventField
+    club {
+      ...ClubField
+    }
+  }
+}
+
+query findOneClubEvent(
+  $cursor: ClubEventWhereUniqueInput
+  $distinct: [ClubEventScalarFieldEnum!]
+  $orderBy: [ClubEventOrderByWithRelationAndSearchRelevanceInput!]
+  $skip: Int
+  $take: Int
+  $where: ClubEventWhereInput
+) {
+  findOneClubEvent(
+    cursor: $cursor
+    distinct: $distinct
+    orderBy: $orderBy
+    skip: $skip
+    take: $take
+    where: $where
+  ) {
+    ...ClubEventField
+  }
+}
+
+query findOneClubEventWithClub(
+  $cursor: ClubEventWhereUniqueInput
+  $distinct: [ClubEventScalarFieldEnum!]
+  $orderBy: [ClubEventOrderByWithRelationAndSearchRelevanceInput!]
+  $skip: Int
+  $take: Int
+  $where: ClubEventWhereInput
+) {
+  findOneClubEvent(
+    cursor: $cursor
+    distinct: $distinct
+    orderBy: $orderBy
+    skip: $skip
+    take: $take
+    where: $where
+  ) {
+    ...ClubEventField
+    club {
+      ...ClubField
+    }
+  }
+}
+
+mutation createClubEvent($data: ClubEventCreateInput!) {
+  createClubEvent(data: $data) {
+    ...ClubEventField
+  }
+}
+
+mutation updateClubEvent(
+  $data: ClubEventUpdateInput!
+  $where: ClubEventWhereUniqueInput!
+) {
+  updateClubEvent(data: $data, where: $where) {
+    ...ClubEventField
+  }
+}
+
+fragment ClubEventField on ClubEvent {
+  id
+  clubId
+  createdAt
+  updatedAt
+  name
+  description
+  startAt
+  endAt
+  status
+  thumbnail
+}

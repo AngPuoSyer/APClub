@@ -9,7 +9,7 @@ datasource db {
 generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["fullTextSearch", "fullTextIndex"]
-  binaryTargets   = ["native", "debian-openssl-1.1.x"]
+  binaryTargets   = ["native", "linux-musl"]
 }
 
 generator dbml {
@@ -78,10 +78,11 @@ model SuperAdmin {
 model ClubMember {
   id String @id @default(uuid())
 
-  userId String
-  user   User   @relation(fields: [userId], references: [id])
-  clubId String
-  club   Club   @relation(fields: [clubId], references: [id])
+  userId  String
+  user    User    @relation(fields: [userId], references: [id])
+  clubId  String
+  club    Club    @relation(fields: [clubId], references: [id])
+  isAdmin Boolean @default(false)
 
   status ClubMemberStatusEnum
 
@@ -156,6 +157,10 @@ model ClubEvent {
   status      ClubEventStatusEnum @default(IN_REVIEW)
   thumbnail   String?
 
+  requestJobId    String?
+  eventStartJobId String?
+  eventEndJobId   String?
+
   clubId String
   club   Club   @relation(fields: [clubId], references: [id])
 
@@ -172,8 +177,13 @@ model ClubEventMember {
   eventId String
   event   ClubEvent @relation(fields: [eventId], references: [id])
 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
   status     ClubMemberEventStatusEnum     @default(JOINED)
   attendance ClubMemberEventAttendanceEnum @default(ABSENT)
+
+  @@unique([userId, eventId])
 }
 
 enum StudentStatusEnum {
@@ -222,6 +232,7 @@ enum ClubEventStatusEnum {
   ONGOING
   CANCELLED
   AWAITING
+  FINISHED
 }
 
 enum ClubMemberStatusEnum {

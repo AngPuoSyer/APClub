@@ -28,14 +28,12 @@ const login = async ({ email, password, rememberMe }: LoginPayload) => {
     },
   });
   if (!error) {
-    console.log(data)
+    toast.add({severity: 'sucess', summary: 'Login Successfully', life: 5000})
     authStore.setAccessToken(data?.loginSuperAdmin?.accessToken!);
     authStore.setRememberMe(rememberMe)
     navigateTo('clubs')
-    toast.add({severity: 'sucess', summary: 'Login Successfully', life: 5000})
   } else {
     toast.add({ severity: "error", summary: "Login Failed", detail: error.message,life: 5000 });
-    console.log(error)
   }
 };
 </script>

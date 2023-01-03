@@ -79,26 +79,32 @@
           </div>
           <div class="col-span-1">
             <Button
-              class="p-button-danger"
+              class="p-button-danger p-button-raised"
               icon="pi pi-minus"
               @click="removeAdmin(index)"
             ></Button>
           </div>
         </div>
-        <Button label="Add" icon="pi pi-plus" @click="newAdmin" />
+        <Button
+          label="Add"
+          icon="pi pi-plus"
+          @click="newAdmin"
+          class="p-button-raised"
+        />
       </div>
       <div class="w-10/12 mt-3 flex justify-end gap-3">
         <Button
           type="button"
           label="Cancel"
           icon="pi pi-times"
-          class="p-button-danger p-button-outlined"
+          class="p-button-danger p-button-outlined p-button-raised"
           @click="cancelCreate"
         />
         <Button
           type="submit"
           label="Submit"
           icon="pi pi-user-plus"
+          class="p-button-raised"
           :loading="loading"
         />
       </div>
@@ -109,6 +115,7 @@
 <script setup lang="ts">
 import {
   ClubAdminRoleEnum,
+  GetUserSelectionsQueryVariables,
   QueryMode,
   useGetUserSelectionsQuery,
 } from "@apclub/graphql";
@@ -203,18 +210,14 @@ const nameSearchString = ref("");
 
 const { data: userSelectionData, executeQuery: userSelectionQuery } =
   useGetUserSelectionsQuery({
-    variables: computed(() =>
-      nameSearchString.value
-        ? {
-            where: {
-              username: {
-                mode: QueryMode.Insensitive,
-                contains: nameSearchString.value,
-              },
-            },
-          }
-        : null
-    ),
+    variables: computed<GetUserSelectionsQueryVariables>(() => ({
+      where: {
+        username: {
+          mode: QueryMode.Insensitive,
+          contains: nameSearchString.value,
+        },
+      },
+    })),
   });
 
 const completeUserSelection = async (e: any) => {
@@ -228,9 +231,9 @@ const labelCheck = (admin: ClubAdminInputType) => {
 const newAdmin = () => {
   adminInput.value.push({
     name: {
-      typename: '',
-      id: '',
-      username:''
+      typename: "",
+      id: "",
+      username: "",
     },
     role: ClubAdminRoleEnum.Commitee,
     label: "",
@@ -380,9 +383,8 @@ const submitAdminCreate = () => {
 <style scoped>
 :deep .p-button.p-autocomplete-dropdown {
   background-color: white;
-  color: #6C757D;
+  color: #6c757d;
   border-left: 0px;
-  border-color: #CED4D9;
-
+  border-color: #ced4d9;
 }
 </style>

@@ -10,6 +10,16 @@ mutation loginClubAdmin($data: LoginInput!) {
   }
 }
 
+mutation loginUser($data: LoginInput!) {
+  loginUser(data: $data) {
+    ...TokenFragment
+  }
+}
+
+mutation refreshToken($token: String!) {
+  refreshToken(refreshToken: $token)
+}
+
 fragment TokenFragment on Token {
   accessToken
   refreshToken

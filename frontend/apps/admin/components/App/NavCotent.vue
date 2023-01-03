@@ -6,7 +6,6 @@
           <div class="flex items-center">
             <Icon v-if="context.icon" :name="context.icon" class="p-2 mr-2" size="40px"></Icon>
             <span>{{context.label}}</span>
-
           </div>
         </nuxt-link>
       </li>
