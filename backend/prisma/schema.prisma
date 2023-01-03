@@ -12,15 +12,15 @@ generator client {
   binaryTargets   = ["native", "linux-musl"]
 }
 
-generator dbml {
-  provider = "prisma-dbml-generator"
-}
+// generator dbml {
+//   provider = "prisma-dbml-generator"
+// }
 
-generator erd {
-  provider                  = "prisma-erd-generator"
-  output                    = "../ERD.pdf"
-  includeRelationFromFields = true
-}
+// generator erd {
+//   provider                  = "prisma-erd-generator"
+//   output                    = "../ERD.pdf"
+//   includeRelationFromFields = true
+// }
 
 generator nestgraphql {
   provider     = "node node_modules/prisma-nestjs-graphql"
